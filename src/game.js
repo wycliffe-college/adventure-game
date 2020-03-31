@@ -53,9 +53,13 @@ const runner = new Runner(world, {
 });
 
 // start the runner
+var trans= ctx.getTransform();
 runner.start(
     () => {
         explorer.applyForceToCenter(forceVector,true);
+        var pos = explorer.getPosition();
+        ctx.setTransform(trans.a,trans.b,trans.c,trans.d,trans.e-(pos.x*scale), trans.f);
+        console.log( ctx.getTransform());
         renderer.renderWorld();
     });
 
