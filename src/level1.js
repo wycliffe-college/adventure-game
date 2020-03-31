@@ -1,3 +1,4 @@
+const Vec2 = planck.Vec2;
 var level1 = {
     create: function(world)
     {
