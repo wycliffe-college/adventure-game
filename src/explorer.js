@@ -1,16 +1,19 @@
-var explorer = {
-    create: function(world)
-    {
-        var explorer = world.createDynamicBody(Vec2(0.0, 1.0));
-        explorer.createFixture(planck.Polygon([
-            Vec2(-1.5, -0.5),
-            Vec2(1.5, -0.5),
-            Vec2(1.5, 0.0),
-            Vec2(0.0, 0.9),
-            Vec2(-1.15, 0.9),
-            Vec2(-1.5, 0.2)
-        ]), 1.0);
+export function createExplorer(world) {
+    const explorer = world.createDynamicBody(Vec2(0.0, -2.0));
+    explorer.createFixture(planck.Box(0.89, 1.20), 1.0);
+    //explorer.createFixture(planck.Circle(1.2), 1.0);
 
-        return explorer;
-    },
-};
+    const img = new Image();
+    img.src = "images/explorer.png";
+    img.onload = () => {
+        explorer.render = {
+            custom: (ctx, pos, size) => {
+                ctx.drawImage(img, pos.x, pos.y, size.width, size.height);
+                return false // don't draw bounding box
+            }
+        }
+    };
+    return explorer;
+}
+
+

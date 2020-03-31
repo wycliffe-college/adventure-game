@@ -1,39 +1,61 @@
-//const canvas = document.querySelector('#test');
-//const ctx = canvas.getContext('2d');
-const Vec2 = planck.Vec2 ;
+const { World, Vec2, Box, Edge, Circle, RevoluteJoint, Polygon } = planck;
+
+import Renderer, { Runner } from 'https://cdn.jsdelivr.net/npm/planck-renderer@2.2.0/dist/renderer.min.js';
+import { createExplorer } from "./explorer.js";
+import { doKeyDown , doKeyUp , forceVector } from './bindings.js';
+import { createLevel } from './level1.js';
 
 function createWorld() {
     // initialise the world with gravity towards the bottom of the screen
     var world = new planck.World({
-        gravity : Vec2(0, -10)
+        gravity : Vec2(0, 10)
     });
 
     // create the ground
-    var ground = level1.create(world);
-
+    var ground = createLevel(world);
     return world;
 }
 
-planck.testbed(function(testbed) {
-    testbed.speed = 1.3;
-    testbed.hz = 50;
+// canvas and graphics context
+const canvas = document.querySelector('#test');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const ctx = canvas.getContext('2d');
+ctx.translate(canvas.width / 2, canvas.height/2);
 
-    var world = createWorld();
+// key bindings
+document.onkeydown = (e) => { doKeyDown(e,explorer) };
+document.onkeyup = doKeyUp;
 
-    // create an explorer
-    var person = explorer.create(world);
+// create the world
+const world = createWorld();
+const explorer = createExplorer(world);
 
-    //keep the person on the screen
-    testbed.step = function() {
-        var cp = person.getPosition();
-        if (cp.x > testbed.x + 10) {
-            testbed.x = cp.x - 10;
-
-        } else if (cp.x < testbed.x - 10) {
-            testbed.x = cp.x + 10;
-        }
-    };
-
-    // rest of your code
-    return world; // make sure you return the world
+// create a renderer
+const scale = 30;
+const renderer = new Renderer(world, ctx, {
+    scale: scale
 });
+
+renderer.clear = (canvas, ctx) => {
+    ctx.clearRect(
+        -canvas.width / 2,
+        -canvas.height / 2,
+        canvas.width,
+        canvas.height
+    );
+};
+
+// create the runner
+const runner = new Runner(world, {
+    speed: 1,
+    fps: 60,
+});
+
+// start the runner
+runner.start(
+    () => {
+        explorer.applyForceToCenter(forceVector,true);
+        renderer.renderWorld();
+    });
+
