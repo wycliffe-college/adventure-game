@@ -31,6 +31,22 @@ document.onkeyup = doKeyUp;
 const world = createWorld();
 const explorer = createExplorer(world);
 
+//creating background
+const backgroundimg = new Image();
+backgroundimg.src = "images/background.png"
+backgroundimg.onload = () => {
+    world.background=backgroundimg;
+
+};
+
+const backgroundmidimg = new Image();
+backgroundmidimg.src = "images/backgroundmid.png"
+backgroundmidimg.onload = () => {
+    world.backgroundmid = backgroundmidimg;
+
+
+};
+
 // create a renderer
 const scale = 30;
 const renderer = new Renderer(world, ctx, {
@@ -38,12 +54,7 @@ const renderer = new Renderer(world, ctx, {
 });
 
 renderer.clear = (canvas, ctx) => {
-    ctx.clearRect(
-        -canvas.width / 2,
-        -canvas.height / 2,
-        canvas.width,
-        canvas.height
-    );
+
 };
 
 // create the runner
@@ -60,6 +71,18 @@ runner.start(
         var pos = explorer.getPosition();
         ctx.setTransform(trans.a,trans.b,trans.c,trans.d,trans.e-(pos.x*scale), trans.f);
         console.log( ctx.getTransform());
+        ctx.clearRect(
+            -canvas.width / 2,
+            -canvas.height / 2,
+            canvas.width,
+            canvas.height
+        );
+        if(world.background)(
+            ctx.drawImage(world.background, (-canvas.width/2)+((pos.x*scale)*0.1), -canvas.height/2, canvas.width, canvas.height )
+        );
+        if(world.backgroundmid)(
+            ctx.drawImage(world.backgroundmid, (-canvas.width/2)+((pos.x*scale)*0.01), (-canvas.height/2)+100, canvas.width, canvas.height )
+        );
         renderer.renderWorld();
     });
 
