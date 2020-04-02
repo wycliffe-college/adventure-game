@@ -4,7 +4,8 @@ import Renderer, { Runner } from 'https://cdn.jsdelivr.net/npm/planck-renderer@2
 import { createExplorer } from "./explorer.js";
 import { doKeyDown , doKeyUp , forceVector } from './bindings.js';
 //import { createLevel } from './level1.js';
-import { createLevel } from './brendans-level.js'; //comment out this code to add brendans level
+//import { createLevel } from './brendans-level.js'; //comment out this code to add/remove brendan's level
+import { createLevel } from './Josias-orginal-level.js'; //comment out this code to add/remove Josia's level
 
 function createWorld() {
     // initialise the world with gravity towards the bottom of the screen
