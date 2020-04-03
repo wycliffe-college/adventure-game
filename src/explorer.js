@@ -14,5 +14,3 @@ export function createExplorer(world) {
     };
     return explorer;
 }
-
-
