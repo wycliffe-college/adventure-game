@@ -1,3 +1,5 @@
+import { Vec2, Box } from "./planck-module.js";
+
 //Brendan's Level, based upon level1.js
 
 const friction = 0.6;

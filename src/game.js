@@ -1,7 +1,6 @@
-const { World, Vec2, Box, Edge, Circle, RevoluteJoint, Polygon } = planck;
-
 import Renderer, { Runner } from 'https://cdn.jsdelivr.net/npm/planck-renderer@2.2.0/dist/renderer.min.js';
 import { createExplorer } from "./explorer.js";
+import { Vec2, Box } from "./planck-module.js";
 import { doKeyDown , doKeyUp , forceVector } from './bindings.js';
 //import { createLevel } from './level1.js';
 //import { createLevel } from './brendans-level.js'; //comment out this code to add/remove brendan's level

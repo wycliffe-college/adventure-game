@@ -1,3 +1,5 @@
+import { Vec2, Box } from "./planck-module.js";
+
 export function createLevel(world) {
     var ground = world.createBody();
     var groundFD = {density: 0.0, friction: 0.6};

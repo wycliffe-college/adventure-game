@@ -1,3 +1,5 @@
+import { Vec2, Box } from "./planck-module.js";
+
 const forceMagnitude = 100;
 
 export var forceVector = Vec2(0,0);

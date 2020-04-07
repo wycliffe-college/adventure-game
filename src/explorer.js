@@ -1,3 +1,5 @@
+import { Vec2, Box } from "./planck-module.js";
+
 export function createExplorer(world) {
     const explorer = world.createDynamicBody(Vec2(0.0, -2.0));
     explorer.createFixture(planck.Box(0.89, 1.20), 1.0);
