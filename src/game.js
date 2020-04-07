@@ -117,7 +117,7 @@ runner.start(
 
         // draw the background
         var pos = explorer.getPosition();
-        ctx.setTransform(trans.a,trans.b,trans.c,trans.d,trans.e-(pos.x*scale), trans.f);
+        ctx.setTransform(trans.a,trans.b,trans.c,trans.d,trans.e-(pos.x*scale), trans.f-(pos.y*scale));
         //console.log( ctx.getTransform());
         if(world.background)(
             ctx.drawImage(world.background, (-canvas.width/2)+((pos.x*scale)*0.1), -canvas.height/2, canvas.width, canvas.height )
