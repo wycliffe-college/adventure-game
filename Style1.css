@@ -1,17 +1,126 @@
+
 body {
-    background-color: lightblue;
+    background-color: #8A2BE2;
 }
 
-h2 {
+h1 {
     color: white;
     text-align: center;
-    #font-family: verdana;
-    font-size:  35px  ;
+    font-family: verdana    ;
+    font-size:  65px  ;
 }
 
 p {
-    color:  red;
+    color:  white;
     text-align: center;
-    #font-family: verdana;
-    font-size: 20px;
+    font-family: verdana;
+    font-size: 30px;
+}
+
+p1 {
+    color:  Yellow;
+    text-align: center;
+    font-family: verdana;
+    font-size: 30px;
+}
+
+button {
+    font-size: 25px;
+    Font-family: Verdana;
+    Background-color: white;
+    border: none;
+    Padding: 15px 35px;
+    Display: inline-block;
+    Border-radius: 12px ;
+    Margin:4px 2px;
+    Transition-duration: 0.4s;
+    Width: 24.6%;
+}
+
+button:hover {
+    background-color: black ;
+    color: white;
+}
+
+.image1 {
+    Float: left;
+    Width: 105px;
+    Height: 105px;
+}
+
+.image2 {
+    Float: right;
+    Width: 105px;
+    Height: 105px;
+}
+
+.image3{
+    Height: 200px;
+    Width: 215px;
+
+}
+
+Table {
+    Font-family: Verdana;
+    width: 100%;
+    Border-collapse: collapse;
+    Text-align: left;
+    Background-Color: #8A2BE2;
+    color: yellow;
+    Padding: 12px;
+    Font-size: 30px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+Tr:hover{
+    Background-Color: white ;
+    color: black ;
+}
+
+Td, th{
+
+    Border-bottom: 1px solid white;
+    Padding: 8px;
+}
+
+Form{
+    Font-family: Verdana;
+    Font-size:35px ;
+    color: white;
+
+}
+
+.input1{
+    width: 50%;
+    height: 15px;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    background-color: #f8f8f8;
+    resize: none;
+    Font-size:20px;
+
+}
+
+.input2{
+    width: 50%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+    Font-size: 20px;
+
+}
+
+.input3 {
+    font-size: 50px;
+    Padding: 20px 35px;
+    Cursor: pointer;
+    Background-Colour: white;
+    Color: black;
 }
