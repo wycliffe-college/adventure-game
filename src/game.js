@@ -5,7 +5,7 @@ import { doKeyDown , doKeyUp , applyImpulse , desiredVerticalVelocity, desiredHo
 import { createCanvas, createContext, getClipRect, clearCanvas} from "./canvas.js";
 
 //Import available levels
-import { createLevel as defaultLevel } from './level1.js';
+import { createLevel as defaultLevel } from './default_level.js';
 import { createLevel as brendanLevel } from './brendans-level.js';
 import { createLevel as josiaLevel } from './Josias-orginal-level.js';
 var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel };

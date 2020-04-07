@@ -1,6 +1,6 @@
 import { Vec2, Box } from "./planck-module.js";
 
-//Brendan's Level, based upon level1.js
+//Brendan's Level, based upon default_level.js
 
 
 import { createPlatform } from './platform.js';
