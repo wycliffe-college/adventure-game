@@ -1,7 +1,7 @@
 import Renderer, { Runner } from 'https://cdn.jsdelivr.net/npm/planck-renderer@2.2.0/dist/renderer.min.js';
 import { createExplorer } from "./explorer.js";
 import { Vec2, Box } from "./planck-module.js";
-import { doKeyDown , doKeyUp , forceVector } from './bindings.js';
+import { doKeyDown , doKeyUp , applyImpulse , desiredVerticalVelocity, desiredHorizontalVelocity } from './movement.js';
 
 //Import available levels
 import { createLevel as defaultLevel } from './level1.js';
@@ -29,7 +29,7 @@ function parseHtmlParameters()
 function createWorld(params) {
     // initialise the world with gravity towards the bottom of the screen
     var world = new planck.World({
-        gravity : Vec2(0, 10)
+        gravity : Vec2(0, 30)
     });
 
     // create the ground
@@ -45,8 +45,8 @@ const ctx = canvas.getContext('2d');
 ctx.translate(canvas.width / 2, canvas.height/2); //finds center of screen
 
 // key bindings
-document.onkeydown = (e) => { doKeyDown(e,explorer) };
-document.onkeyup = doKeyUp;
+document.onkeydown = doKeyDown ;
+document.onkeyup = doKeyUp ;
 
 // create the world
 var params = parseHtmlParameters();
@@ -86,16 +86,21 @@ const runner = new Runner(world, {
 var trans= ctx.getTransform();
 runner.start(
     () => {
-        explorer.applyForceToCenter(forceVector,true);
-        var pos = explorer.getPosition();
-        ctx.setTransform(trans.a,trans.b,trans.c,trans.d,trans.e-(pos.x*scale), trans.f);
-        //console.log( ctx.getTransform());
+        // Move the explorer
+        applyImpulse(explorer)
+
+        // clear the canvas
         ctx.clearRect(
             -canvas.width / 2,
             -canvas.height / 2,
             canvas.width,
             canvas.height
         );
+
+        // draw the background
+        var pos = explorer.getPosition();
+        ctx.setTransform(trans.a,trans.b,trans.c,trans.d,trans.e-(pos.x*scale), trans.f);
+        //console.log( ctx.getTransform());
         if(world.background)(
             ctx.drawImage(world.background, (-canvas.width/2)+((pos.x*scale)*0.1), -canvas.height/2, canvas.width, canvas.height )
         );
