@@ -34,14 +34,14 @@ const explorer = createExplorer(world);
 
 //creating background
 const backgroundimg = new Image();
-backgroundimg.src = "images/background.png"
+backgroundimg.src = "images/background.png";
 backgroundimg.onload = () => {
     world.background=backgroundimg;
 
 };
 
 const backgroundmidimg = new Image();
-backgroundmidimg.src = "images/backgroundmid.png"
+backgroundmidimg.src = "images/backgroundmid.png";
 backgroundmidimg.onload = () => {
     world.backgroundmid = backgroundmidimg;
 
