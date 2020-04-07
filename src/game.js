@@ -2,11 +2,12 @@ import Renderer, { Runner } from 'https://cdn.jsdelivr.net/npm/planck-renderer@2
 import { createExplorer } from "./explorer.js";
 import { Vec2, Box } from "./planck-module.js";
 import { doKeyDown , doKeyUp , applyImpulse , desiredVerticalVelocity, desiredHorizontalVelocity } from './movement.js';
+import { createCanvas, createContext, getClipRect, clearCanvas} from "./canvas.js";
 
 //Import available levels
 import { createLevel as defaultLevel } from './level1.js';
-import { createLevel as brendanLevel } from './brendans-level.js'; //comment out this code to add/remove brendan's level
-import { createLevel as josiaLevel } from './Josias-orginal-level.js'; //comment out this code to add/remove Josia's level
+import { createLevel as brendanLevel } from './brendans-level.js';
+import { createLevel as josiaLevel } from './Josias-orginal-level.js';
 var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel };
 
 // Function to parse the url data into parameters
@@ -29,7 +30,7 @@ function parseHtmlParameters()
 function createWorld(params) {
     // initialise the world with gravity towards the bottom of the screen
     var world = new planck.World({
-        gravity : Vec2(0, 30)
+        gravity : Vec2(0, 40)
     });
 
     // create the ground
@@ -38,11 +39,8 @@ function createWorld(params) {
 }
 
 // canvas and graphics context
-const canvas = document.querySelector('#test');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const ctx = canvas.getContext('2d');
-ctx.translate(canvas.width / 2, canvas.height/2); //finds center of screen
+const canvas = createCanvas();
+const ctx = createContext(canvas);
 
 // key bindings
 document.onkeydown = doKeyDown ;
@@ -72,9 +70,7 @@ const renderer = new Renderer(world, ctx, {
     scale: scale
 });
 
-renderer.clear = (canvas, ctx) => {
-
-};
+renderer.clear = (canvas, ctx) => {};
 
 // create the runner
 const runner = new Runner(world, {
@@ -87,15 +83,13 @@ var trans= ctx.getTransform();
 runner.start(
     () => {
         // Move the explorer
-        applyImpulse(explorer)
+        applyImpulse(explorer);
+
+        //get the current clip rect
+        var cliprect = getClipRect(ctx);
 
         // clear the canvas
-        ctx.clearRect(
-            -canvas.width / 2,
-            -canvas.height / 2,
-            canvas.width,
-            canvas.height
-        );
+        clearCanvas(ctx);
 
         // draw the background
         var pos = explorer.getPosition();
