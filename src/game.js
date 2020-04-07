@@ -35,6 +35,7 @@ function createWorld(params) {
 
     // create the ground
     levels[params.level](world);
+
     return world;
 }
 
@@ -50,6 +51,29 @@ document.onkeyup = doKeyUp ;
 var params = parseHtmlParameters();
 const world = createWorld( params );
 const explorer = createExplorer(world);
+
+// handle collisions
+world.on('begin-contact', function(contact) {
+    var fixtureA = contact.getFixtureA();
+    var fixtureB = contact.getFixtureB();
+
+    // count floor contacts
+    if (fixtureA === explorer.footSensor || fixtureB === explorer.footSensor ) {
+        explorer.numFootContacts += 1;
+        console.log( explorer.numFootContacts );
+    }
+});
+
+world.on('end-contact', function(contact) {
+    var fixtureA = contact.getFixtureA();
+    var fixtureB = contact.getFixtureB();
+
+    // count floor contacts
+    if (fixtureA === explorer.footSensor || fixtureB === explorer.footSensor ) {
+        explorer.numFootContacts -= 1;
+        console.log( explorer.numFootContacts );
+    }
+});
 
 //creating background
 const backgroundimg = new Image();

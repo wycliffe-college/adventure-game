@@ -42,7 +42,7 @@ export function doKeyUp(e) {
 export function applyImpulse(explorer) {
     var vel = explorer.getLinearVelocity();
     var delta_velocity = Vec2(desiredHorizontalVelocity - vel.x ,0);
-    if( desiredVerticalVelocity ) {
+    if( desiredVerticalVelocity && explorer.numFootContacts > 0) {
         delta_velocity.y = desiredVerticalVelocity - vel.y;
     }
     var impulse = Vec2( explorer.getMass() * delta_velocity.x , explorer.getMass() * delta_velocity.y ) ;
