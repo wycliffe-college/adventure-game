@@ -2,18 +2,38 @@ import Renderer, { Runner } from 'https://cdn.jsdelivr.net/npm/planck-renderer@2
 import { createExplorer } from "./explorer.js";
 import { Vec2, Box } from "./planck-module.js";
 import { doKeyDown , doKeyUp , forceVector } from './bindings.js';
-//import { createLevel } from './level1.js';
-//import { createLevel } from './brendans-level.js'; //comment out this code to add/remove brendan's level
-import { createLevel } from './Josias-orginal-level.js'; //comment out this code to add/remove Josia's level
 
-function createWorld() {
+//Import available levels
+import { createLevel as defaultLevel } from './level1.js';
+import { createLevel as brendanLevel } from './brendans-level.js'; //comment out this code to add/remove brendan's level
+import { createLevel as josiaLevel } from './Josias-orginal-level.js'; //comment out this code to add/remove Josia's level
+var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel };
+
+// Function to parse the url data into parameters
+function parseHtmlParameters()
+{
+    //Add parameters and their default values to this dictionary
+    var params = {"level":"default"};
+
+    var parameters = location.search.substring(1).split("&");
+    var index;
+    for (index = 0; index < parameters.length; index++) {
+        var temp = parameters[0].split("=");
+        if ( unescape(temp[0]) in params ) {
+            params[unescape(temp[0])] = unescape(temp[1]);
+        }
+    }
+    return params;
+}
+
+function createWorld(params) {
     // initialise the world with gravity towards the bottom of the screen
     var world = new planck.World({
         gravity : Vec2(0, 10)
     });
 
     // create the ground
-    createLevel(world);
+    levels[params.level](world);
     return world;
 }
 
@@ -29,7 +49,8 @@ document.onkeydown = (e) => { doKeyDown(e,explorer) };
 document.onkeyup = doKeyUp;
 
 // create the world
-const world = createWorld();
+var params = parseHtmlParameters();
+const world = createWorld( params );
 const explorer = createExplorer(world);
 
 //creating background
@@ -37,15 +58,12 @@ const backgroundimg = new Image();
 backgroundimg.src = "images/background.png";
 backgroundimg.onload = () => {
     world.background=backgroundimg;
-
 };
 
 const backgroundmidimg = new Image();
 backgroundmidimg.src = "images/backgroundmid.png";
 backgroundmidimg.onload = () => {
     world.backgroundmid = backgroundmidimg;
-
-
 };
 
 // create a renderer
@@ -71,7 +89,7 @@ runner.start(
         explorer.applyForceToCenter(forceVector,true);
         var pos = explorer.getPosition();
         ctx.setTransform(trans.a,trans.b,trans.c,trans.d,trans.e-(pos.x*scale), trans.f);
-        console.log( ctx.getTransform());
+        //console.log( ctx.getTransform());
         ctx.clearRect(
             -canvas.width / 2,
             -canvas.height / 2,
