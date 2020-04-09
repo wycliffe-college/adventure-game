@@ -15,7 +15,7 @@ var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brenda
 function parseHtmlParameters()
 {
     //Add parameters and their default values to this dictionary
-    var params = {"level":"brendan"}; //BRENDAN CHANGED THIS TO ACCESS HIS LEVEL
+    var params = {"level":"default"};
 
     var parameters = location.search.substring(1).split("&");
     var index;

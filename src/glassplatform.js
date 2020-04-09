@@ -46,7 +46,7 @@ export function createPlatform(world, position, width) {
                 ctx.drawImage(leftimg, offset, pos.y+px2phy(px_verticaloffset), px2phy(leftimg.width), px2phy(leftimg.height));
             }
             offset += px2phy(px_leftwidth);
-            while( offset + px2phy(px_centerwidth+px_rightwidth)< size.width ) {
+            while( offset + px2phy(px_centerwidth+px_rightwidth) < size.width ) {
                 if (centerimg.complete) {
                     ctx.drawImage(centerimg, offset, pos.y+px2phy(px_verticaloffset), px2phy(centerimg.width), px2phy(centerimg.height));
                 }
