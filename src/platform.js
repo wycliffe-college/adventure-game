@@ -12,9 +12,9 @@ export function createPlatform(world, position, width, imageAddress="./images/pl
 
     //When the image loads, run the function...
     img.onload = () => {
-        img.render = {
+        platform.render = {
             custom: (ctx, pos, size) => {
-                ctx.drawImage(img, pos.x, pos.y, (size.width), (size.height));
+                ctx.drawImage(img, pos.x, pos.y, size.width, size.height);
                 return true // don't draw bounding box
             }
         }
