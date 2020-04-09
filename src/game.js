@@ -120,10 +120,10 @@ runner.start(
         ctx.setTransform(trans.a,trans.b,trans.c,trans.d,trans.e-(pos.x*scale), trans.f-(pos.y*scale));
         //console.log( ctx.getTransform());
         if(world.background)(
-            ctx.drawImage(world.background, (-canvas.width/2)+((pos.x*scale)*0.1), -canvas.height/2, canvas.width, canvas.height )
+            ctx.drawImage(world.background, (-canvas.width/2)+((pos.x*scale)*0.9), -canvas.height/2, canvas.width, canvas.height )
         );
         if(world.backgroundmid)(
-            ctx.drawImage(world.backgroundmid, (-canvas.width/2)+((pos.x*scale)*0.01), (-canvas.height/2)+100, canvas.width, canvas.height )
+            ctx.drawImage(world.backgroundmid, (-canvas.width/2)+((pos.x*scale)*0.1), (-canvas.height/2)+100, canvas.width, canvas.height )
         );
         renderer.renderWorld();
     });
