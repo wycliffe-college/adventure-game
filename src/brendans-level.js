@@ -12,6 +12,5 @@ export function createLevel(world) {
     var groundFD = {density: density, friction: friction};
 
     createPlatform(world,Vec2(0,0),10);
-
-    world.createBody(Vec2(-10,-10)).createFixture(planck.Box(1.0, 0.25), groundFD);
+    createPlatform(world,Vec2(-20,-4),1);
 }

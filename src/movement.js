@@ -18,8 +18,6 @@ export function doKeyDown(e) {
     if (e.keyCode === 40) { //down
         desiredVerticalVelocity += maxVerticalVelocity ;
     }
-    console.log( desiredHorizontalVelocity);
-
     e.preventDefault();
 }
 

@@ -23,7 +23,7 @@ export function createExplorer(world) {
         explorer.render = {
             custom: (ctx, pos, size) => {
                 ctx.drawImage(img, pos.x, pos.y, size.width, size.height);
-                return false // don't draw bounding box
+                return true // don't draw bounding box
             }
         }
     };

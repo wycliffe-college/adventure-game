@@ -3,6 +3,7 @@ import { createExplorer } from "./explorer.js";
 import { Vec2, Box } from "./planck-module.js";
 import { doKeyDown , doKeyUp , applyImpulse , desiredVerticalVelocity, desiredHorizontalVelocity } from './movement.js';
 import { createCanvas, createContext, getClipRect, clearCanvas} from "./canvas.js";
+import {scale} from "./scale.js"
 
 //Import available levels
 import { createLevel as defaultLevel } from './default_level.js';
@@ -60,7 +61,6 @@ world.on('begin-contact', function(contact) {
     // count floor contacts
     if (fixtureA === explorer.footSensor || fixtureB === explorer.footSensor ) {
         explorer.numFootContacts += 1;
-        console.log( explorer.numFootContacts );
     }
 });
 
@@ -71,7 +71,6 @@ world.on('end-contact', function(contact) {
     // count floor contacts
     if (fixtureA === explorer.footSensor || fixtureB === explorer.footSensor ) {
         explorer.numFootContacts -= 1;
-        console.log( explorer.numFootContacts );
     }
 });
 
@@ -89,7 +88,6 @@ backgroundmidimg.onload = () => {
 };
 
 // create a renderer
-const scale = 30;
 const renderer = new Renderer(world, ctx, {
     scale: scale
 });
