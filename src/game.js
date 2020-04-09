@@ -24,6 +24,7 @@ function parseHtmlParameters()
             params[unescape(temp[0])] = unescape(temp[1]);
         }
     }
+    console.log(params);
     return params;
 }
 
