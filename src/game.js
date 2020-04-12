@@ -3,6 +3,7 @@ import { createExplorer } from "./explorer.js";
 import { Vec2, Box } from "./planck-module.js";
 import { doKeyDown , doKeyUp , applyImpulse , desiredVerticalVelocity, desiredHorizontalVelocity } from './movement.js';
 import { createCanvas, createContext, getClipRect, clearCanvas} from "./canvas.js";
+import {scale} from "./scale.js"
 
 //Import available levels
 import { createLevel as defaultLevel } from './default_level.js';
@@ -24,6 +25,7 @@ function parseHtmlParameters()
             params[unescape(temp[0])] = unescape(temp[1]);
         }
     }
+    console.log(params);
     return params;
 }
 
@@ -60,7 +62,6 @@ world.on('begin-contact', function(contact) {
     // count floor contacts
     if (fixtureA === explorer.footSensor || fixtureB === explorer.footSensor ) {
         explorer.numFootContacts += 1;
-        console.log( explorer.numFootContacts );
     }
 });
 
@@ -71,13 +72,12 @@ world.on('end-contact', function(contact) {
     // count floor contacts
     if (fixtureA === explorer.footSensor || fixtureB === explorer.footSensor ) {
         explorer.numFootContacts -= 1;
-        console.log( explorer.numFootContacts );
     }
 });
 
 //creating background
 const backgroundimg = new Image();
-backgroundimg.src = "images/background.png";
+backgroundimg.src = "images/game background tile.png";
 backgroundimg.onload = () => {
     world.background=backgroundimg;
 };
@@ -89,7 +89,6 @@ backgroundmidimg.onload = () => {
 };
 
 // create a renderer
-const scale = 30;
 const renderer = new Renderer(world, ctx, {
     scale: scale
 });
@@ -119,10 +118,27 @@ runner.start(
         var pos = explorer.getPosition();
         ctx.setTransform(trans.a,trans.b,trans.c,trans.d,trans.e-(pos.x*scale), trans.f-(pos.y*scale));
         //console.log( ctx.getTransform());
-        if(world.background)(
-            ctx.drawImage(world.background, (-canvas.width/2)+((pos.x*scale)*0.9), -canvas.height/2, canvas.width, canvas.height )
-        );
+
+        if(world.background) {
+            var cliprectpos = cliprect.x+(cliprect.width / 2)
+            var backgroundrenderpos = cliprectpos / backgroundimg.width/50
+
+            var backgroundrenderposleft = (Math.floor(backgroundrenderpos)) * 2516
+            var backgroundrenderposright = (Math.ceil(backgroundrenderpos)) * 2516
+            if((backgroundrenderpos-Math.floor(backgroundrenderpos))<0.5){
+                var backgroundrenderposleft = ((Math.floor(backgroundrenderpos))*2516)-2516
+                var backgroundrenderposright = (Math.floor(backgroundrenderpos))*2516
+
+            }
+            ctx.drawImage(world.background, backgroundrenderposleft+(((pos.x*scale*50)-pos.x*scale)/50), (-canvas.height / 2)+(pos.y*scale)*0.9, backgroundimg.width, backgroundimg.height)
+            ctx.drawImage(world.background, backgroundrenderposright+(((pos.x*scale*50)-pos.x*scale)/50), -canvas.height / 2+(pos.y*scale)*0.9, backgroundimg.width, backgroundimg.height)
+
+
+        };
         if(world.backgroundmid)(
+
+
+
             ctx.drawImage(world.backgroundmid, (-canvas.width/2)+((pos.x*scale)*0.1), (-canvas.height/2)+100, canvas.width, canvas.height )
         );
         renderer.renderWorld();
