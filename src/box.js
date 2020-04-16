@@ -3,7 +3,7 @@
 export function createBox(world, position, width, height, density=1, imageAddress="./images/Crest_White.png") {
 
     //Make the platform as an object
-    const box = world.createBody(position);
+    const box = world.createDynamicBody(position);
 
     //Fix the platform to the world with a width and fixed height of 0.25
     box.createFixture(planck.Box(width, height),density);
