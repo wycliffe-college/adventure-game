@@ -1,4 +1,4 @@
-export function createPlatform(world, position, width, imageAddress="./images/platform_brickwall.png") {
+export function createPlatform(world, position, definiton) {
 
     //Make the platform as an object
     const platform = world.createBody(position);

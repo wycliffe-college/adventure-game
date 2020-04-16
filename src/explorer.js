@@ -21,7 +21,7 @@ export function createExplorer(world) {
     img.src = "images/explorer.png";
     img.onload = () => {
         explorer.render = {
-            custom: (ctx, pos, size) => {
+            custom: (ctx, pos, size, ) => {
                 ctx.drawImage(img, pos.x, pos.y, size.width, size.height);
                 return true // don't draw bounding box
             }
