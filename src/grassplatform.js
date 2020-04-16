@@ -16,7 +16,7 @@ centerimg.src = "images/grasscenter.png";
 const rightimg = new Image();
 rightimg.src = "images/grassright.png";
 
-function createPlatformLeft( world , x , y ) {
+function createPlatformLeft( world , x , y , definition ) {
     const platform = world.createBody(Vec2(x,y));
     platform.createFixture(planck.Box(px2phy(px_leftwidth/2),px2phy(px_platformheight/2)), 1.0);
     platform.render = {
@@ -67,6 +67,7 @@ export function createPlatform(world, position, width) {
     var offset = position.x - (width/2);
 
     //create the starting piece
+    offset += px2phy(px_leftwidth/2);
     createPlatformLeft(world, offset, position.y);
     offset += px2phy(px_leftwidth/2);
 
