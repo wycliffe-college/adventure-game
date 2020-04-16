@@ -17,12 +17,9 @@ export function createLevel(world) {
 
     //Create a platform
     createPlatform(world, Vec2(-2,0), 8);
-
     createPlatform(world, Vec2(-10,-3), 3);
-
     createPlatform(world, Vec2(3,-5), 2);
 
-    createBox(world, Vec2(0, -20), 1, 1);
+    const box1 = createBox(world, Vec2(0, -20), 1, 1, 1000);
 
-    //world.createBody(Vec2(-10,-10)).createFixture(planck.Box(1.0, 0.25), groundFD);
 }
