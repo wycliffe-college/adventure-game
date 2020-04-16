@@ -88,10 +88,10 @@ p1 {
     width: 25%;
 }
 
-.button_table button:hover{
+.button_table button:hover {
     Background-Color: black;
-    color: white ;
-
+    color: white;
+}
 Form{
     Font-family: Verdana;
     Font-size:35px ;
@@ -134,17 +134,33 @@ Form{
 }
 
 a:link {
-    Background-color: white;
-    color: white;
+    color: black;
     padding: 14px 25px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     Font-family: Verdana, serif;
+    border-radius: 12px;
 }
 
 a:hover, a:active {
     background-color: red;
 }
 
+.games_table button {
+    Width:100%;
+    Font-size: 30px;
+    Border-radius: 12px ;
+    Padding: 15px 35px;
+    Background-Color:white;
+}
+
+.games_table td {
+    width: 25%;
+}
+
+.games_table button:hover {
+    Background-Color: red;
+    color: black;
+}
 
