@@ -2,7 +2,8 @@ import { Vec2, Box, FixtureDef } from "./planck-module.js";
 
 export function createExplorer(world) {
     const explorer = world.createDynamicBody(Vec2(0.0, -2.0));
-    explorer.createFixture(Box(1, 2), 1.0);
+    explorer.mainFixture = explorer.createFixture(Box(1, 2), 1.0);
+
 
     //stop the explorer from rotating, i.e. falling over
     explorer.setFixedRotation(true);
@@ -22,6 +23,10 @@ export function createExplorer(world) {
     img.onload = () => {
         explorer.render = {
             custom: (fixture, ctx, pos, size) => {
+                if (fixture == explorer.footSensor ) {
+                    // don't draw the foot sensor
+                    return false;
+                }
                 ctx.drawImage(img, pos.x, pos.y, size.width, size.height);
                 return true // don't draw bounding box
             }
