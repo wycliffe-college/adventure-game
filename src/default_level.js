@@ -1,5 +1,5 @@
 import { Vec2, Box } from "./planck-module.js";
-import {createPlatform} from "./glassplatform.js";
+import {createPlatform} from "./grassplatform.js";
 
 export function createLevel(world) {
     var ground = world.createBody();
