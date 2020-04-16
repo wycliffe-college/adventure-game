@@ -18,6 +18,15 @@ export function doKeyDown(e) {
     if (e.keyCode === 40) { //down
         desiredVerticalVelocity += maxVerticalVelocity ;
     }
+    if (e.keyCode === 112) { //F1
+        window.location.href="./game.html?level=default" ;
+    }
+    if (e.keyCode === 113) { //F2
+        window.location.href="./game.html?level=brendan" ;
+    }
+    if (e.keyCode === 114) { //F3
+        window.location.href="./game.html?level=josia" ;
+    }
     e.preventDefault();
 }
 
