@@ -1,4 +1,5 @@
-import Renderer, { Runner } from 'https://cdn.jsdelivr.net/npm/planck-renderer@2.2.0/dist/renderer.min.js';
+import { CanvasRenderer as Renderer } from './renderer-canvas.js';
+import { Runner } from './renderer-run.js';
 import { createExplorer } from "./explorer.js";
 import { Vec2, Box } from "./planck-module.js";
 import { doKeyDown , doKeyUp , applyImpulse , desiredVerticalVelocity, desiredHorizontalVelocity } from './movement.js';
@@ -132,13 +133,8 @@ runner.start(
             }
             ctx.drawImage(world.background, backgroundrenderposleft+(((pos.x*scale*50)-pos.x*scale)/50), (-canvas.height / 2)+(pos.y*scale)*0.9, backgroundimg.width, backgroundimg.height)
             ctx.drawImage(world.background, backgroundrenderposright+(((pos.x*scale*50)-pos.x*scale)/50), -canvas.height / 2+(pos.y*scale)*0.9, backgroundimg.width, backgroundimg.height)
-
-
-        };
+        }
         if(world.backgroundmid)(
-
-
-
             ctx.drawImage(world.backgroundmid, (-canvas.width/2)+((pos.x*scale)*0.1), (-canvas.height/2)+100, canvas.width, canvas.height )
         );
         renderer.renderWorld();
