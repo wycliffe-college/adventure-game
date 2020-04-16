@@ -137,6 +137,6 @@ runner.start(
         if(world.backgroundmid)(
             ctx.drawImage(world.backgroundmid, (-canvas.width/2)+((pos.x*scale)*0.1), (-canvas.height/2)+100, canvas.width, canvas.height )
         );
-        renderer.renderWorld();
+        renderer.renderWorld(cliprect);
     });
 

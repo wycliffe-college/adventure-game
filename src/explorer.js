@@ -4,6 +4,8 @@ export function createExplorer(world) {
     const explorer = world.createDynamicBody(Vec2(0.0, -2.0));
     explorer.mainFixture = explorer.createFixture(Box(1, 2), 1.0);
 
+    // draw the explorer on layer 2
+    explorer.drawingLayer = 2 ;
 
     //stop the explorer from rotating, i.e. falling over
     explorer.setFixedRotation(true);
