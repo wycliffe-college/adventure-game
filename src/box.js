@@ -15,7 +15,7 @@ export function createBox(world, position, width, height, density=1, imageAddres
     //When the image loads, run the function...
     img.onload = () => {
         box.render = {
-            custom: (ctx, pos, size) => {
+            custom: (fixture, ctx, pos, size) => {
                 ctx.drawImage(img, pos.x, pos.y, size.width, size.height);
                 return true // don't draw bounding box
             }

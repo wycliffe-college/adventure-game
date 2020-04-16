@@ -20,7 +20,7 @@ function createPlatformLeft( world , x , y , definition ) {
     const platform = world.createBody(Vec2(x,y));
     platform.createFixture(planck.Box(px2phy(px_leftwidth/2),px2phy(px_platformheight/2)), 1.0);
     platform.render = {
-        custom: (ctx, pos, size) => {
+        custom: (fixture, ctx, pos, size) => {
             if (leftimg.complete) {
                 ctx.drawImage(leftimg, pos.x, pos.y + px2phy(px_verticaloffset),
                     px2phy(leftimg.width), px2phy(leftimg.height));
@@ -34,7 +34,7 @@ function createPlatformRight( world , x , y ) {
     const platform = world.createBody(Vec2(x,y));
     platform.createFixture(planck.Box(px2phy(px_rightwidth/2),px2phy(px_platformheight/2)), 1.0);
     platform.render = {
-        custom: (ctx, pos, size) => {
+        custom: (fixture , ctx, pos, size) => {
             if (rightimg.complete) {
                 ctx.drawImage(rightimg, pos.x, pos.y + px2phy(px_verticaloffset),
                     px2phy(rightimg.width), px2phy(rightimg.height));
@@ -48,7 +48,7 @@ function createPlatformCenter( world , x , y ) {
     const platform = world.createBody(Vec2(x,y));
     platform.createFixture(planck.Box(px2phy(px_centerwidth/2),px2phy(px_platformheight/2)), 1.0);
     platform.render = {
-        custom: (ctx, pos, size) => {
+        custom: (fixture , ctx, pos, size) => {
             if (centerimg.complete) {
                 ctx.drawImage(centerimg, pos.x, pos.y + px2phy(px_verticaloffset),
                     px2phy(centerimg.width), px2phy(centerimg.height));

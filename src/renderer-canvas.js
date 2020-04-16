@@ -59,22 +59,21 @@ class CanvasRenderer {
         }
 
         const type = fixture.getType();
-        const shape = fixture.getShape();
 
         ctx.save();
         ctx.scale(this.options.scale, this.options.scale)
         ctx.lineWidth = options.lineWidth;
         if (type === "circle") {
-          this.drawCircle(body, shape);
+          this.drawCircle(body, fixture);
         }
         if (type === "edge") {
-          this.drawEdge(body, shape);
+          this.drawEdge(body, fixture);
         }
         if (type === "polygon") {
-          this.drawPolygon(body, shape);
+          this.drawPolygon(body, fixture);
         }
         if (type === 'chain') {
-          this.drawPolygon(body, shape);
+          this.drawPolygon(body, fixture);
         }
         ctx.restore()
       }
@@ -88,11 +87,11 @@ class CanvasRenderer {
     }
   }
 
-  drawCircle(body, shape) {
+  drawCircle(body, fixture) {
     const ctx = this.ctx;
     const lw = this.options.lineWidth
 
-    const radius = shape.m_radius;
+    const radius = fixture.getShape().m_radius;
     const pos = body.getPosition();
     const angle = body.getAngle();
 
@@ -107,7 +106,7 @@ class CanvasRenderer {
         y: - radius - lw * 2,
       }
 
-      if (body.render.custom(ctx, pos, size + lw) !== true) {
+      if (body.render.custom(fixture , ctx, pos, size + lw) !== true) {
         return
       }
     }
@@ -119,12 +118,12 @@ class CanvasRenderer {
     ctx.restore();
   }
 
-  drawEdge(body, shape) {
+  drawEdge(body, fixture) {
     const ctx = this.ctx;
 
-    const v1 = shape.m_vertex1;
-    const v2 = shape.m_vertex2;
-    
+    const v1 = fixture.getShape().m_vertex1;
+    const v2 = fixture.getShape().m_vertex2;
+
     ctx.beginPath();
     ctx.moveTo(v1.x, v1.y);
     ctx.lineTo(v2.x, v2.y);
@@ -132,11 +131,11 @@ class CanvasRenderer {
     ctx.stroke();
   }
 
-  drawPolygon(body, shape) {
+  drawPolygon(body, fixture) {
     const ctx = this.ctx;
     const lw = this.options.lineWidth
 
-    const vertices = shape.m_vertices;
+    const vertices = fixture.getShape().m_vertices;
     if (!vertices.length) {
       return;
     }
@@ -171,7 +170,7 @@ class CanvasRenderer {
         y: minY - lw,
       }
 
-      if (body.render.custom(ctx, pos, size) !== true) {
+      if (body.render.custom(fixture, ctx, pos, size) !== true) {
         return
       }
     }
