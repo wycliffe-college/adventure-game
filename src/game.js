@@ -118,13 +118,14 @@ runner.start(
 
         if(world.background) {
             var cliprectpos = cliprect.x+(cliprect.width / 2)
-            var backgroundrenderpos = cliprectpos / canvas.height* 2.36686391/50
+            var backgroundrenderpos = cliprectpos / (canvas.height* 2.36686391) /50
 
-            var backgroundrenderposleft = (Math.floor(backgroundrenderpos)) * canvas.height* 2.36686391
-            var backgroundrenderposright = (Math.ceil(backgroundrenderpos)) * canvas.height* 2.36686391
-            if((backgroundrenderpos-Math.floor(backgroundrenderpos))<0.5){
-                var backgroundrenderposleft = ((Math.floor(backgroundrenderpos))*canvas.height* 2.36686391)-canvas.height* 2.36686391
-                var backgroundrenderposright = (Math.floor(backgroundrenderpos))*canvas.height* 2.36686391
+
+            var backgroundrenderposleft = (Math.floor(backgroundrenderpos)) * (canvas.height* 2.36686391)
+            var backgroundrenderposright = (Math.ceil(backgroundrenderpos)) * (canvas.height* 2.36686391)
+            if((backgroundrenderpos-Math.floor(backgroundrenderpos))<0.5 ){
+                var backgroundrenderposleft = ((Math.floor(backgroundrenderpos))*canvas.height* 2.36686391)-(canvas.height* 2.36686391)
+                var backgroundrenderposright = (Math.floor(backgroundrenderpos))*(canvas.height* 2.36686391)
 
             }
             ctx.drawImage(world.background, backgroundrenderposleft+(((pos.x*scale*50)-pos.x*scale)/50), (-canvas.height / 2)+(pos.y*scale)*0.9, canvas.height* 2.36686391, canvas.height)
