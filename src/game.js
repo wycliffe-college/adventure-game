@@ -79,16 +79,12 @@ world.on('end-contact', function(contact) {
 
 //creating background
 const backgroundimg = new Image();
-backgroundimg.src = "images/game background tile.png";
+backgroundimg.src = "images/seamlessmountain.jpg";
 backgroundimg.onload = () => {
     world.background=backgroundimg;
 };
 
-const backgroundmidimg = new Image();
-backgroundmidimg.src = "images/backgroundmid.png";
-backgroundmidimg.onload = () => {
-    world.backgroundmid = backgroundmidimg;
-};
+
 
 // create a renderer
 const renderer = new Renderer(world, ctx, {
@@ -123,20 +119,19 @@ runner.start(
 
         if(world.background) {
             var cliprectpos = cliprect.x+(cliprect.width / 2)
-            var backgroundrenderpos = cliprectpos / backgroundimg.width/50
+            var backgroundrenderpos = cliprectpos / (canvas.height* 2.36686391) /50
 
-            var backgroundrenderposleft = (Math.floor(backgroundrenderpos)) * 2516
-            var backgroundrenderposright = (Math.ceil(backgroundrenderpos)) * 2516
-            if((backgroundrenderpos-Math.floor(backgroundrenderpos))<0.5){
-                var backgroundrenderposleft = ((Math.floor(backgroundrenderpos))*2516)-2516
-                var backgroundrenderposright = (Math.floor(backgroundrenderpos))*2516
+
+            var backgroundrenderposleft = (Math.floor(backgroundrenderpos)) * (canvas.height* 2.36686391)
+            var backgroundrenderposright = (Math.ceil(backgroundrenderpos)) * (canvas.height* 2.36686391)
+            if((backgroundrenderpos-Math.floor(backgroundrenderpos))<0.5 ){
+                var backgroundrenderposleft = ((Math.floor(backgroundrenderpos))*canvas.height* 2.36686391)-(canvas.height* 2.36686391)
+                var backgroundrenderposright = (Math.floor(backgroundrenderpos))*(canvas.height* 2.36686391)
 
             }
-            ctx.drawImage(world.background, backgroundrenderposleft+(((pos.x*scale*50)-pos.x*scale)/50), (-canvas.height / 2)+(pos.y*scale)*0.9, backgroundimg.width, backgroundimg.height)
-            ctx.drawImage(world.background, backgroundrenderposright+(((pos.x*scale*50)-pos.x*scale)/50), -canvas.height / 2+(pos.y*scale)*0.9, backgroundimg.width, backgroundimg.height)
+            ctx.drawImage(world.background, backgroundrenderposleft+(((pos.x*scale*50)-pos.x*scale)/50), (-canvas.height / 2)+(pos.y*scale)*0.9, canvas.height* 2.36686391, canvas.height)
+            ctx.drawImage(world.background, backgroundrenderposright+(((pos.x*scale*50)-pos.x*scale)/50), -canvas.height / 2+(pos.y*scale)*0.9, canvas.height* 2.36686391, canvas.height)
         }
-        if(world.backgroundmid)(
-            ctx.drawImage(world.backgroundmid, (-canvas.width/2)+((pos.x*scale)*0.1), (-canvas.height/2)+100, canvas.width, canvas.height )
-        );
+
         renderer.renderWorld(cliprect);
     });
