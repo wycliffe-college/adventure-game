@@ -38,7 +38,7 @@ function createWorld(params) {
     });
 
     // create the ground
-    levels[params.level](world);
+    world.door = levels[params.level](world);
 
     return world;
 }
@@ -64,6 +64,12 @@ world.on('begin-contact', function(contact) {
     // count floor contacts
     if (fixtureA === explorer.footSensor || fixtureB === explorer.footSensor ) {
         explorer.numFootContacts += 1;
+    }
+    if( world.door != undefined ) {
+        if ((fixtureA === world.door.doorSensor && fixtureB === explorer.mainFixture) ||
+            (fixtureB === world.door.doorSensor && fixtureA === explorer.mainFixture)) {
+            window.location = "game.html?level=brendan";
+        }
     }
 });
 

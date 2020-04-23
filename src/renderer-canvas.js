@@ -5,9 +5,9 @@ class CanvasRenderer {
             scale: defaultScale,
             lineWidth: 1 / defaultScale,
             strokeStyle: {
-                dynamic: 'black',
-                static: 'black',
-                kinematic: 'black',
+                dynamic: 'white',
+                static: 'white',
+                kinematic: 'white',
             },
         };
         this.options = Object.assign(defaultOptions, options);
@@ -88,7 +88,7 @@ class CanvasRenderer {
             }
 
             // don't draw things not on the screen
-            // ToDo
+            // ToDo using cliprect
 
             // finally - draw this thing
             this.renderBody(ctx, options, body)
