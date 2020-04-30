@@ -9,8 +9,9 @@ import {scale} from "./scale.js"
 //Import available levels
 import { createLevel as defaultLevel } from './default_level.js';
 import { createLevel as brendanLevel } from './brendans-level.js';
+import { createLevel as ParkerLevel } from './Parker_level.js';
 import { createLevel as josiaLevel } from './Josias-orginal-level.js';
-var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel };
+var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel , "Parker" :ParkerLevel};
 
 // Function to parse the url data into parameters
 function parseHtmlParameters()
@@ -37,7 +38,7 @@ function createWorld(params) {
     });
 
     // create the ground
-    levels[params.level](world);
+    world.door = levels[params.level](world);
 
     return world;
 }
@@ -63,6 +64,12 @@ world.on('begin-contact', function(contact) {
     // count floor contacts
     if (fixtureA === explorer.footSensor || fixtureB === explorer.footSensor ) {
         explorer.numFootContacts += 1;
+    }
+    if( world.door != undefined ) {
+        if ((fixtureA === world.door.doorSensor && fixtureB === explorer.mainFixture) ||
+            (fixtureB === world.door.doorSensor && fixtureA === explorer.mainFixture)) {
+            window.location = "game.html?level=brendan";
+        }
     }
 });
 
@@ -134,4 +141,3 @@ runner.start(
 
         renderer.renderWorld(cliprect);
     });
-
