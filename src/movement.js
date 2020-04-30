@@ -7,16 +7,16 @@ export var desiredHorizontalVelocity = 0.0 ;
 export var desiredVerticalVelocity = 0.0 ;
 export function doKeyDown(e) {
     if (e.keyCode === 37) { //left
-        desiredHorizontalVelocity -= maxHorizontalVelocity ;
+        desiredHorizontalVelocity = Math.max( desiredHorizontalVelocity -= maxHorizontalVelocity , -maxHorizontalVelocity );
     }
     if (e.keyCode === 38) { //up
-        desiredVerticalVelocity -= maxVerticalVelocity ;
+        desiredVerticalVelocity = Math.max(desiredVerticalVelocity -= maxVerticalVelocity , -maxVerticalVelocity ) ;
     }
     if (e.keyCode === 39) { //right
-        desiredHorizontalVelocity += maxHorizontalVelocity ;
+        desiredHorizontalVelocity = Math.min(desiredHorizontalVelocity += maxHorizontalVelocity , maxHorizontalVelocity ) ;
     }
     if (e.keyCode === 40) { //down
-        desiredVerticalVelocity += maxVerticalVelocity ;
+        desiredVerticalVelocity = Math.min(desiredVerticalVelocity += maxVerticalVelocity, maxVerticalVelocity ) ;
     }
     if (e.keyCode === 112) { //F1
         window.location.href="./game.html?level=default" ;
