@@ -18,4 +18,6 @@ export function createLevel(world) {
 
     //Create a platform
     createPlatform(world, 10,10,20,grass);
+    createPlatform(world, -5, 5, 10, grass);
+    createPlatform(world, 0, -15, 5, grass);
 }
