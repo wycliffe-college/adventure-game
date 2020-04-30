@@ -1,30 +1,29 @@
-//The attributes for the brick platform
-
-export var brick = Object();
+//The attributes for the grass platform
+export var grass = Object();
 
 //Left stuff
-brick.leftImage = new Image();
-brick.leftImage.src = 'images/grassleft.png';
-brick.px_leftWidth = 60;
+grass.leftImage = new Image();
+grass.leftImage.src = 'images/grassleft.png';
+grass.px_leftWidth = 60;
 
 //Right stuff
-brick.rightImage = new Image();
-brick.rightImage.src = 'images/grassright.png';
-brick.px_rightWidth = 64;
+grass.rightImage = new Image();
+grass.rightImage.src = 'images/grassright.png';
+grass.px_rightWidth = 64;
 
 //centre stuff
-brick.centreImage = new Image();
-brick.centreImage.src = 'images/grasscenter.png';
-brick.px_centreWidth = 289;
+grass.centreImage = new Image();
+grass.centreImage.src = 'images/grasscenter.png';
+grass.px_centreWidth = 289;
 
 //Misc vars.
-brick.verticalOffset = -80;
+grass.verticalOffset = -80;
 
-brick.friction = 1;
-brick.px_platformHeight = 100;
+grass.friction = 1;
+grass.px_platformHeight = 100;
 
-brick.px_minWidth = brick.px_leftWidth + brick.px_rightWidth;
+grass.px_minWidth = grass.px_leftWidth + grass.px_rightWidth;
 
 
 //set to false to show the bounding boxes
-brick.boundingBox = true;
+grass.boundingBox = true;

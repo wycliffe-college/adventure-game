@@ -6,16 +6,16 @@ const maxHorizontalVelocity = 20;
 export var desiredHorizontalVelocity = 0.0 ;
 export var desiredVerticalVelocity = 0.0 ;
 export function doKeyDown(e) {
-    if (e.keyCode === 37) { //left
+    if ( (e.keyCode === 37) || (e.keyCode === 65) ) { //left OR "a" key
         desiredHorizontalVelocity = Math.max( desiredHorizontalVelocity -= maxHorizontalVelocity , -maxHorizontalVelocity );
     }
-    if (e.keyCode === 38) { //up
+    if ( (e.keyCode === 38) || (e.keyCode === 87) ) { //up OR w key
         desiredVerticalVelocity = Math.max(desiredVerticalVelocity -= maxVerticalVelocity , -maxVerticalVelocity ) ;
     }
-    if (e.keyCode === 39) { //right
+    if ( (e.keyCode === 39) || (e.keyCode === 68) ) { //right or d key
         desiredHorizontalVelocity = Math.min(desiredHorizontalVelocity += maxHorizontalVelocity , maxHorizontalVelocity ) ;
     }
-    if (e.keyCode === 40) { //down
+    if ( (e.keyCode === 40) || (e.keyCode === 83) ) { //down or s key
         desiredVerticalVelocity = Math.min(desiredVerticalVelocity += maxVerticalVelocity, maxVerticalVelocity ) ;
     }
     if (e.keyCode === 112) { //F1
@@ -31,16 +31,16 @@ export function doKeyDown(e) {
 }
 
 export function doKeyUp(e) {
-    if (e.keyCode === 37) { //left
+    if ( (e.keyCode === 37) || (e.keyCode === 65) ) { //left
         desiredHorizontalVelocity = 0.0 ;
     }
-    if (e.keyCode === 38) { //up
+    if ( (e.keyCode === 38) || (e.keyCode === 87) ) { //up
         desiredVerticalVelocity = 0.0 ;
     }
-    if (e.keyCode === 39) { //right
+    if ( (e.keyCode === 39) || (e.keyCode === 68) ) { //right
         desiredHorizontalVelocity = 0.0 ;
     }
-    if (e.keyCode === 40) { //down
+    if ( (e.keyCode === 40) || (e.keyCode === 83) ) { //down
         desiredVerticalVelocity = 0.0 ;
     }
     e.preventDefault();

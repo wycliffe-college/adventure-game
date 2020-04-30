@@ -1,7 +1,7 @@
 //Brendan's Level
 import { Vec2, Box } from "./planck-module.js";
 import { createPlatform } from './platform.js';
-import {brick} from "./grass_definition.js";
+import {grass} from "./grass_definition.js";
 import {createBox} from './box.js';
 
 
@@ -17,5 +17,7 @@ export function createLevel(world) {
     var groundFD = {density: density, friction: friction};
 
     //Create a platform
-    createPlatform(world, 10,10,20,brick);
+    createPlatform(world, 10,10,20,grass);
+    createPlatform(world, -5, 5, 10, grass);
+    createPlatform(world, 0, -15, 5, grass);
 }
