@@ -3,7 +3,8 @@
 import {Vec2} from "./planck-module.js"
 import {phy2px, px2phy} from "./scale.js";
 
-var definition = "grass_definition.js"
+//This sets a default value for the definition
+var definition = "grass_definition.js";
 
 export function createPlatform(world, xPos, yPos, width, definition) {
 
