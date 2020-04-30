@@ -20,7 +20,7 @@ grass.px_centreWidth = 289;
 grass.verticalOffset = -80;
 
 grass.friction = 1;
-grass.px_platformHeight = 100;
+grass.px_platformHeight = 45;
 
 grass.px_minWidth = grass.px_leftWidth + grass.px_rightWidth;
 
