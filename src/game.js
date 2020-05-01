@@ -82,6 +82,12 @@ backgroundimg.src = "images/seamlessmountain.jpg";
 backgroundimg.onload = () => {
     world.background=backgroundimg;
 };
+const foregroundimg = new Image();
+foregroundimg.src = "images/foreground.png";
+foregroundimg.onload = () => {
+    world.foreground=foregroundimg;
+};
+
 
 
 
@@ -118,20 +124,39 @@ runner.start(
 
         if(world.background) {
             var cliprectpos = cliprect.x+(cliprect.width / 2)
-            var backgroundrenderpos = cliprectpos / (canvas.height* 2.36686391) /50
+            var ratio = backgroundimg.width / backgroundimg .height
+            var backgroundrenderpos = cliprectpos / (canvas.height* ratio) /50
 
 
-            var backgroundrenderposleft = (Math.floor(backgroundrenderpos)) * (canvas.height* 2.36686391)
-            var backgroundrenderposright = (Math.ceil(backgroundrenderpos)) * (canvas.height* 2.36686391)
+            var backgroundrenderposleft = (Math.floor(backgroundrenderpos)) * (canvas.height* ratio)
+            var backgroundrenderposright = (Math.ceil(backgroundrenderpos)) * (canvas.height*ratio)
             if((backgroundrenderpos-Math.floor(backgroundrenderpos))<0.5 ){
-                var backgroundrenderposleft = ((Math.floor(backgroundrenderpos))*canvas.height* 2.36686391)-(canvas.height* 2.36686391)
-                var backgroundrenderposright = (Math.floor(backgroundrenderpos))*(canvas.height* 2.36686391)
+                var backgroundrenderposleft = ((Math.floor(backgroundrenderpos))*canvas.height* ratio)-(canvas.height*ratio)
+                var backgroundrenderposright = (Math.floor(backgroundrenderpos))*(canvas.height* ratio)
 
             }
-            ctx.drawImage(world.background, backgroundrenderposleft+(((pos.x*scale*50)-pos.x*scale)/50), (-canvas.height / 2)+(pos.y*scale)*0.9, canvas.height* 2.36686391, canvas.height)
-            ctx.drawImage(world.background, backgroundrenderposright+(((pos.x*scale*50)-pos.x*scale)/50), -canvas.height / 2+(pos.y*scale)*0.9, canvas.height* 2.36686391, canvas.height)
+            ctx.drawImage(world.background, backgroundrenderposleft+(((pos.x*scale*50)-pos.x*scale)/50), (-canvas.height / 2)+(pos.y*scale)*0.9, canvas.height* ratio, canvas.height)
+            ctx.drawImage(world.background, backgroundrenderposright+(((pos.x*scale*50)-pos.x*scale)/50), -canvas.height / 2+(pos.y*scale)*0.9, canvas.height* ratio, canvas.height)
         }
+        if(world.foreground) {
+            var cliprectpos = cliprect.x+(cliprect.width / 1.2)
+            var ratio = foregroundimg.width / foregroundimg .height
+            var foregroundrenderpos = cliprectpos / (canvas.height* ratio/1.2)
+            var renderleft = foregroundrenderpos-1
 
-        renderer.renderWorld(cliprect);
+            var backgroundrenderposmid =   Math.floor(foregroundrenderpos)* (canvas.height* ratio/1.2)
+            var backgroundrenderposleft = (Math.floor(renderleft)) *(canvas.height* ratio/1.2)
+            var backgroundrenderposright = Math.ceil(foregroundrenderpos)*(canvas.height* ratio/1.2)
+
+            ctx.drawImage(world.foreground, backgroundrenderposleft, -0, canvas.height* ratio/1.2, canvas.height/1.2)
+            ctx.drawImage(world.foreground, backgroundrenderposright,0, canvas.height* ratio/1.2 , canvas.height/1.2)
+            ctx.drawImage(world.foreground, backgroundrenderposmid, 0 ,canvas.height* ratio/1.2 , canvas.height/1.2)
+        }
+        renderer.renderWorld(cliprect)
     });
+
+
+
+
+
 
