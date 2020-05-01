@@ -25,7 +25,7 @@ function createPlatformLeft( world , x , y , definition ) {
                 ctx.drawImage(leftimg, pos.x, pos.y + px2phy(px_verticaloffset),
                     px2phy(leftimg.width), px2phy(leftimg.height));
             }
-            return true;
+            return false;
         }
     };
 }
@@ -39,7 +39,7 @@ function createPlatformRight( world , x , y ) {
                 ctx.drawImage(rightimg, pos.x, pos.y + px2phy(px_verticaloffset),
                     px2phy(rightimg.width), px2phy(rightimg.height));
             }
-            return true;
+            return false;
         }
     };
 }
@@ -53,7 +53,7 @@ function createPlatformCenter( world , x , y ) {
                 ctx.drawImage(centerimg, pos.x, pos.y + px2phy(px_verticaloffset),
                     px2phy(centerimg.width), px2phy(centerimg.height));
             }
-            return true;
+            return false;
         }
     };
 }
