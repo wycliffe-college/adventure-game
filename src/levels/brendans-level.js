@@ -29,9 +29,9 @@ export function createLevel(world) {
     createPlatform(world, -3, -2, 1, grass); //single platform attached to door plat right
 
 
-    createObtainable(world, Vec2(0,0));
+    //createObtainable(world, Vec2(0,0));
 
 
-    return createDoor(world, Vec2(-10,-8)); //Must be called last.
+    return createDoor(world, Vec2(-10,-8)); //Must be called last. (??)
 
 }
