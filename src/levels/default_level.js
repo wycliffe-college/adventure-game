@@ -1,6 +1,6 @@
-import { Vec2, Box } from "./planck-module.js";
-import {createPlatform} from "./grassplatform.js";
-import {createDoor} from "./objects/door.js"
+import { Vec2, Box } from "../planck-module.js";
+import {createPlatform} from "../grassplatform.js";
+import {createDoor} from "../objects/door.js"
 
 export function createLevel(world) {
     createPlatform(world, Vec2(-10,-4), 5);
