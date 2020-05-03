@@ -1,4 +1,5 @@
 //The attributes for the grass platform
+
 export var grass = Object();
 
 //Left stuff
@@ -24,6 +25,12 @@ grass.px_platformHeight = 45;
 
 grass.px_minWidth = grass.px_leftWidth + grass.px_rightWidth;
 
+//Portal Stuff
+grass.portalWidth_px = 30;
+grass.portalHeight_px = 30;
+grass.portalAddress = "images/door.png";
 
-//set to false to show the bounding boxes
+
+
+//set to false to hide the bounding boxes
 grass.boundingBox = true;

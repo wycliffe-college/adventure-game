@@ -8,9 +8,9 @@ import {scale} from "./scale.js"
 
 //Import available levels
 import { createLevel as defaultLevel } from './default_level.js';
-import { createLevel as brendanLevel } from './brendans-level.js';
-import { createLevel as ParkerLevel } from './Parker_level.js';
-import { createLevel as josiaLevel } from './Josias-orginal-level.js';
+import { createLevel as brendanLevel } from './levels/brendans-level.js';
+import { createLevel as ParkerLevel } from './levels/Parker_level.js';
+import { createLevel as josiaLevel } from './levels/Josias-orginal-level.js';
 var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel , "Parker" :ParkerLevel};
 
 // Function to parse the url data into parameters

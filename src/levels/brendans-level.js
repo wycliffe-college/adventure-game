@@ -1,8 +1,9 @@
 //Brendan's Level
-import { Vec2, Box } from "./planck-module.js";
-import { createPlatform } from './platform.js';
-import {grass} from "./grass_definition.js";
-import {createBox} from './box.js';
+import { Vec2, Box } from "../planck-module.js";
+import { createPlatform } from '../objects/platform.js';
+import {grass} from "../definitions/grass_definition.js";
+import {createBox} from '../objects/box.js';
+import {createDoor} from "../objects/door.js"
 
 
 //Constant Setting
@@ -20,4 +21,6 @@ export function createLevel(world) {
     createPlatform(world, 10,10,20,grass);
     createPlatform(world, -10, 5, 10, grass);
     createPlatform(world, 9, 0, 5, grass);
+    return createDoor(world, Vec2(-10,0));
+    return createBox(world, Vec2(0,0),10,10);
 }
