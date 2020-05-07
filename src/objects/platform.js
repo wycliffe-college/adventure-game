@@ -60,6 +60,8 @@ export function createPlatform(world, xPos, yPos, width, definition) {
 
     //calculate the number of center pieces
     var numpieces = Math.round((pxWidth - definition.px_minWidth) / definition.px_centreWidth);
+    console.log(numpieces);
+    numpieces = Math.max(numpieces, 0);
     var offset = xPos - (width / 2); //Take xPos from the params input
 
     //create the starting piece
