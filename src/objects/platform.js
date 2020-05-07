@@ -23,7 +23,7 @@ export function createPlatform(world, xPos, yPos, width, definition) {
             custom: (fixture, ctx, pos, size, custom_definition=left_definition) => {
                 if (fixture == platform.edge )  {
                     // don't draw the foot sensor
-                    return true;
+                    return custom_definition.boundingBox;
                 }
                 //console.log(custom_definition);
                 if (custom_definition.leftImage.complete) {
@@ -64,7 +64,7 @@ export function createPlatform(world, xPos, yPos, width, definition) {
             custom: (fixture, ctx, pos, size, custom_definition=right_definition) => {
                 if (fixture == platform.edger )  {
                     // don't draw the foot sensor
-                    return true;
+                    return custom_definition.boundingBox;
                 }
                 //console.log(custom_definition);
                 if (custom_definition.rightImage.complete) {
