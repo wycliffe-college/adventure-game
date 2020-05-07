@@ -5,7 +5,6 @@ TODO:
 - Make definition compatible with the boxes e.g. have texture images for level-specific
 boxes.
 - Density in definition
-
 */
 
 export function createBox(world, position, width, height, density=1, imageAddress="./images/Crest_White.png") {
