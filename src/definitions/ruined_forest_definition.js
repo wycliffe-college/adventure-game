@@ -1,34 +1,34 @@
-//The attributes for the LEVELNAME platform
+//The attributes for the ruined_forest platform
 
-export var LEVELNAME = Object();
+export var ruined_forest = Object();
 
 //Left stuff
-LEVELNAME.leftImage = new Image();
-LEVELNAME.leftImage.src = 'address';
-LEVELNAME.px_leftWidth = 0;
+ruined_forest.leftImage = new Image();
+ruined_forest.leftImage.src = 'images/grassleft.png';
+ruined_forest.px_leftWidth = 60;
 
 //Right stuff
-LEVELNAME.rightImage = new Image();
-LEVELNAME.rightImage.src = 'address';
-LEVELNAME.px_rightWidth = 0;
+ruined_forest.rightImage = new Image();
+ruined_forest.rightImage.src = 'images/grassright.png';
+ruined_forest.px_rightWidth = 64;
 
 //centre stuff
-LEVELNAME.centreImage = new Image();
-LEVELNAME.centreImage.src = 'images/ruined_forest/centrePlat.png';
-LEVELNAME.px_centreWidth = 120;
+ruined_forest.centreImage = new Image();
+ruined_forest.centreImage.src = 'images/ruined_forest/centrePlat.png';
+ruined_forest.px_centreWidth = 120;
 
 //Misc vars.
-LEVELNAME.verticalOffset = 0;
+ruined_forest.verticalOffset = 0;
 
-LEVELNAME.friction = 1; //Default friction, keep same usually.
-LEVELNAME.px_platformHeight = 45; //Keep same usually, this is the height of each platform part
+ruined_forest.friction = 1; //Default friction, keep same usually.
+ruined_forest.px_platformHeight = 45; //Keep same usually, this is the height of each platform part
 
-LEVELNAME.px_minWidth = LEVELNAME.px_leftWidth + LEVELNAME.px_rightWidth; //Dont change
+ruined_forest.px_minWidth = ruined_forest.px_leftWidth + ruined_forest.px_rightWidth; //Dont change
 
 //Portal Stuff
-LEVELNAME.portalWidth_px = 0;
-LEVELNAME.portalHeight_px = 0;
-LEVELNAME.portalAddress = "address";
+ruined_forest.portalWidth_px = 0;
+ruined_forest.portalHeight_px = 0;
+ruined_forest.portalAddress = "images/door.png";
 
 //set to false to hide the bounding boxes
-LEVELNAME.boundingBox = true;
+ruined_forest.boundingBox = true;
