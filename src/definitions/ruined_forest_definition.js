@@ -4,8 +4,8 @@ export var ruined_forest = Object();
 
 //Left stuff
 ruined_forest.leftImage = new Image();
-ruined_forest.leftImage.src = 'images/grassleft.png';
-ruined_forest.px_leftWidth = 60;
+ruined_forest.leftImage.src = 'images/ruined_forest/left.png';
+ruined_forest.px_leftWidth = 30;
 
 //Right stuff
 ruined_forest.rightImage = new Image();
@@ -14,7 +14,7 @@ ruined_forest.px_rightWidth = 64;
 
 //centre stuff
 ruined_forest.centreImage = new Image();
-ruined_forest.centreImage.src = 'images/ruined_forest/centrePlat.png';
+ruined_forest.centreImage.src = 'images/ruined_forest/centre.png';
 ruined_forest.px_centreWidth = 120;
 
 //Misc vars.
