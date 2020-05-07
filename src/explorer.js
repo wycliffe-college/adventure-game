@@ -13,8 +13,13 @@ export function createExplorer(world) {
     //add a foot sensor fixture - so we can tell when we are stood on something
     explorer.footSensor = explorer.createFixture({
         shape: Box(0.5, 0.1, Vec2(0, 2), 0.0),
-        isSensor: true,
+        isSensor: true
     });
+
+    explorer.hook = explorer.createFixture({
+        shape: Box(1.2,0.1, Vec2(0 , -2 ), 0),
+        isSensor: false
+    })
 
     //remember the number of foot contacts
     explorer.numFootContacts = 0;
@@ -25,10 +30,11 @@ export function createExplorer(world) {
     img.onload = () => {
         explorer.render = {
             custom: (fixture, ctx, pos, size) => {
-                if (fixture == explorer.footSensor ) {
+                if (fixture == explorer.footSensor || fixture == explorer.hook )  {
                     // don't draw the foot sensor
                     return true;
                 }
+
                 ctx.drawImage(img, pos.x, pos.y, size.width, size.height);
                 return true // don't draw bounding box
             }

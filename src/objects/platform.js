@@ -2,6 +2,7 @@
 
 import {Vec2} from "../planck-module.js"
 import {phy2px, px2phy} from "../scale.js";
+import {Box} from "../planck-module.js";
 
 //This sets a default value for the definition
 var definition = "definitions/grass_definition.js";
@@ -10,9 +11,19 @@ export function createPlatform(world, xPos, yPos, width, definition) {
 
     function left(world, xPos, yPos, left_definition) {
         const platform = world.createBody(Vec2(xPos,yPos));
-        platform.createFixture(planck.Box(px2phy(left_definition.px_leftWidth / 2), px2phy(left_definition.px_platformHeight / 2)), 1.0);
+        platform.createFixture(planck.Box(px2phy(left_definition.px_leftWidth / 2), px2phy(left_definition.px_platformHeight / 2)), 1.0)
+        platform.edge = platform.createFixture({
+            shape: Box(0.1,px2phy(left_definition.px_platformHeight / 2), Vec2(-px2phy(left_definition.px_leftWidth / 2 )-0.01 ,0 ), 0),
+            isSensor: false,
+            friction: 0
+        })
         platform.render = {
+
             custom: (fixture, ctx, pos, size, custom_definition=left_definition) => {
+                if (fixture == platform.edge )  {
+                    // don't draw the foot sensor
+                    return true;
+                }
                 //console.log(custom_definition);
                 if (custom_definition.leftImage.complete) {
                     ctx.drawImage(custom_definition.leftImage, pos.x, pos.y + px2phy(custom_definition.verticalOffset),
@@ -41,8 +52,17 @@ export function createPlatform(world, xPos, yPos, width, definition) {
     function right(world, xPos, yPos, right_definition) {
         const platform = world.createBody(Vec2(xPos,yPos));
         platform.createFixture(planck.Box(px2phy(right_definition.px_rightWidth / 2), px2phy(right_definition.px_platformHeight / 2)), 1.0);
+        platform.edger = platform.createFixture({
+            shape: Box(0.1,px2phy(right_definition.px_platformHeight / 2), Vec2(px2phy(right_definition.px_rightWidth / 2 )+0.01 ,0 ), 0),
+            isSensor: false,
+            friction: 0
+        })
         platform.render = {
             custom: (fixture, ctx, pos, size, custom_definition=right_definition) => {
+                if (fixture == platform.edger )  {
+                    // don't draw the foot sensor
+                    return true;
+                }
                 //console.log(custom_definition);
                 if (custom_definition.rightImage.complete) {
                     ctx.drawImage(custom_definition.rightImage, pos.x, pos.y + px2phy(custom_definition.verticalOffset),
