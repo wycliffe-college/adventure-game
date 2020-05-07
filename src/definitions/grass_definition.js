@@ -14,8 +14,8 @@ grass.px_rightWidth = 64;
 
 //centre stuff
 grass.centreImage = new Image();
-grass.centreImage.src = 'images/ruined_forest/centrePlat.png';
-grass.px_centreWidth = 298;
+grass.centreImage.src = 'images/grasscenter.png';
+grass.px_centreWidth = 289;
 
 //Misc vars.
 grass.verticalOffset = -80;
