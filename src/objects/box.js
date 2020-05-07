@@ -8,7 +8,7 @@ boxes.
 */
 
 export function createBox(world, position, width, height, density=1, imageAddress="./images/Crest_White.png") {
-
+    console.log( "box")
     //Make the platform as an object
     const box = world.createDynamicBody(position);
 

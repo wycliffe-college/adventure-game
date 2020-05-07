@@ -10,12 +10,21 @@ export function setupCollisionHandling(world ) {
         if (fixtureA === world.explorer.footSensor || fixtureB === world.explorer.footSensor ) {
             world.explorer.numFootContacts += 1;
         }
+
+        // detect when we reach the door
         if( world.door != undefined ) {
-            if ((fixtureA === world.door.doorSensor && fixtureB === world.explorer.mainFixture) ||
-                (fixtureB === world.door.doorSensor && fixtureA === world.explorer.mainFixture)) {
+            if ( (fixtureA === world.door.doorSensor && fixtureB === world.explorer.mainFixture) ||
+                 (fixtureB === world.door.doorSensor && fixtureA === world.explorer.mainFixture) )  {
                 window.location = "game.html?level=brendan";
             }
         }
+
+        // detect if we touch lava
+        if( ( fixtureA === world.explorer.mainFixture && fixtureB.getBody().platform_type === "lava" ) ||
+            ( fixtureB === world.explorer.mainFixture && fixtureA.getBody().platform_type === "lava" ) ) {
+            location.reload() ;
+        }
+
         if( world.obtainable != undefined ) { //I.e. if there is an object like this in the world.
             console.log("program knows that an obtainable exists");
             if ((fixtureA === world.obtainable.obSensor && fixtureB === world.explorer.mainFixture) ||

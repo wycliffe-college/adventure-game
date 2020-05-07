@@ -14,6 +14,8 @@ import { createLevel as ParkerLevel } from './levels/Parker_level.js';
 import { createLevel as josiaLevel } from './levels/Josias-orginal-level.js';
 var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel , "Parker" :ParkerLevel};
 
+console.log( "hello")
+
 // Function to parse the url data into parameters
 function parseHtmlParameters()
 {
@@ -33,6 +35,7 @@ function parseHtmlParameters()
 }
 
 function createWorld(params) {
+    console.log( "world")
     // initialise the world with gravity towards the bottom of the screen
     var world = new planck.World({
         gravity : Vec2(0, 40)
@@ -41,10 +44,8 @@ function createWorld(params) {
     // create the ground
     world.door = levels[params.level](world);
 
-
     //Create the obtainable (key/coin, whatever) object in world
-    world.obtainable = levels[params.level](world);
-
+    //world.obtainable = levels[params.level](world);
 
     return world;
 }

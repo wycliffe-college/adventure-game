@@ -5,17 +5,17 @@ export function createDefinition() {
     
     //Left stuff
     defn.leftImage = new Image();
-    defn.leftImage.src = 'address';
+    defn.leftImage.src = '';
     defn.px_leftWidth = 0;
     
     //Right stuff
     defn.rightImage = new Image();
-    defn.rightImage.src = 'address';
+    defn.rightImage.src = '';
     defn.px_rightWidth = 0;
     
     //centre stuff
     defn.centreImage = new Image();
-    defn.centreImage.src = 'address';
+    defn.centreImage.src = '';
     defn.px_centreWidth = 0;
     
     //Misc vars.
