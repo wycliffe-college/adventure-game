@@ -13,8 +13,8 @@ export function setupCollisionHandling(world ) {
 
         // detect when we reach the door
         if( world.door != undefined ) {
-            if ( (fixtureA === world.door.doorSensor && fixtureB === world.explorer.mainFixture) ||
-                 (fixtureB === world.door.doorSensor && fixtureA === world.explorer.mainFixture) )  {
+            if ( (fixtureA === world.door.doorSensor && fixtureB.getBody() === world.explorer ) ||
+                 (fixtureB === world.door.doorSensor && fixtureA.getBody() === world.explorer) )  {
                 window.location = "game.html?level=brendan";
             }
         }
