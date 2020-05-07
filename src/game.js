@@ -147,16 +147,16 @@ runner.start(
         if(world.foreground) {
             var cliprectpos = cliprect.x+(cliprect.width / 1.2)
             var ratio = foregroundimg.width / foregroundimg .height
-            var foregroundrenderpos = cliprectpos / (canvas.height* ratio/1.2)
+            var foregroundrenderpos = cliprectpos / (canvas.height* ratio/1.2)/10
             var renderleft = foregroundrenderpos-1
 
             var backgroundrenderposmid =   Math.floor(foregroundrenderpos)* (canvas.height* ratio/1.2)
             var backgroundrenderposleft = (Math.floor(renderleft)) *(canvas.height* ratio/1.2)
             var backgroundrenderposright = Math.ceil(foregroundrenderpos)*(canvas.height* ratio/1.2)
 
-            ctx.drawImage(world.foreground, backgroundrenderposleft, -0, canvas.height* ratio/1.2, canvas.height/1.2)
-            ctx.drawImage(world.foreground, backgroundrenderposright,0, canvas.height* ratio/1.2 , canvas.height/1.2)
-            ctx.drawImage(world.foreground, backgroundrenderposmid, 0 ,canvas.height* ratio/1.2 , canvas.height/1.2)
+            ctx.drawImage(world.foreground, backgroundrenderposleft+(((pos.x*scale*5)-pos.x*scale)/5), -canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5) +(canvas.height/4), canvas.height* ratio/1.2, canvas.height/1.2)
+            ctx.drawImage(world.foreground, backgroundrenderposright+(((pos.x*scale*5)-pos.x*scale)/5),-canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5) +(canvas.height/4), canvas.height* ratio/1.2 , canvas.height/1.2)
+            ctx.drawImage(world.foreground, backgroundrenderposmid+(((pos.x*scale*5)-pos.x*scale)/5), -canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5)+(canvas.height/4) ,canvas.height* ratio/1.2, canvas.height/1.2)
         }
         renderer.renderWorld(cliprect)
     });
