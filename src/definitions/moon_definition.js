@@ -1,6 +1,8 @@
 //The attributes for the LEVELNAME platform
 
-export var LEVELNAME = Object();
+import {createDefinition} from "./blank_definition.js";
+
+export var LEVELNAME = createDefinition();
 
 //Left stuff
 LEVELNAME.leftImage = new Image();

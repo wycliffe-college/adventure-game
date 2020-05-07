@@ -5,7 +5,7 @@ import { Vec2, Box } from "./planck-module.js";
 import { doKeyDown , doKeyUp , applyImpulse , desiredVerticalVelocity, desiredHorizontalVelocity } from './movement.js';
 import { createCanvas, createContext, getClipRect, clearCanvas} from "./canvas.js";
 import {scale} from "./scale.js"
-import {gotObtainable} from "./objects/obtainable.js"
+import { setupCollisionHandling } from "./collisions.js";
 
 //Import available levels
 import { createLevel as defaultLevel } from './levels/default_level.js';
@@ -60,42 +60,10 @@ document.onkeyup = doKeyUp ;
 // create the world
 var params = parseHtmlParameters();
 const world = createWorld( params );
-const explorer = createExplorer(world);
+world.explorer = createExplorer(world);
 
-// handle collisions
-world.on('begin-contact', function(contact) {
-    var fixtureA = contact.getFixtureA();
-    var fixtureB = contact.getFixtureB();
-
-    // count floor contacts
-    if (fixtureA === explorer.footSensor || fixtureB === explorer.footSensor ) {
-        explorer.numFootContacts += 1;
-    }
-    if( world.door != undefined ) {
-        if ((fixtureA === world.door.doorSensor && fixtureB === explorer.mainFixture) ||
-            (fixtureB === world.door.doorSensor && fixtureA === explorer.mainFixture)) {
-            window.location = "game.html?level=brendan";
-        }
-    }
-    if( world.obtainable != undefined ) { //I.e. if there is an object like this in the world.
-        console.log("program knows that an obtainable exists");
-        if ((fixtureA === world.obtainable.obSensor && fixtureB === explorer.mainFixture) ||
-            (fixtureB === world.obtainable.obSensor && fixtureA === explorer.mainFixture)) {
-            console.log("Program has sensed contact, running the function");
-            gotObtainable(world, true); //Tells the game that the obtainable has been collected.
-        }
-    }
-});
-
-world.on('end-contact', function(contact) {
-    var fixtureA = contact.getFixtureA();
-    var fixtureB = contact.getFixtureB();
-
-    // count floor contacts
-    if (fixtureA === explorer.footSensor || fixtureB === explorer.footSensor ) {
-        explorer.numFootContacts -= 1;
-    }
-});
+// setup collision handling
+setupCollisionHandling(world);
 
 //creating background
 const backgroundimg = new Image();
@@ -108,9 +76,6 @@ foregroundimg.src = "images/foreground.png";
 foregroundimg.onload = () => {
     world.foreground=foregroundimg;
 };
-
-
-
 
 // create a renderer
 const renderer = new Renderer(world, ctx, {
@@ -130,7 +95,7 @@ var trans= ctx.getTransform();
 runner.start(
     () => {
         // Move the explorer
-        applyImpulse(explorer);
+        applyImpulse(world.explorer);
 
         //get the current clip rect
         var cliprect = getClipRect(ctx);
@@ -139,7 +104,7 @@ runner.start(
         clearCanvas(ctx);
 
         // draw the background
-        var pos = explorer.getPosition();
+        var pos = world.explorer.getPosition();
         ctx.setTransform(trans.a,trans.b,trans.c,trans.d,trans.e-(pos.x*scale), trans.f-(pos.y*scale));
         //console.log( ctx.getTransform());
 

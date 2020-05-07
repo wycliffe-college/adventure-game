@@ -1,6 +1,8 @@
 //The attributes for the brick platform
 
-export var brick = Object();
+import {createDefinition} from "./blank_definition.js";
+
+export var brick = createDefinition();
 
 //Left stuff
 brick.leftImage = new Image();

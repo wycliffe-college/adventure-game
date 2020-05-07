@@ -1,34 +1,41 @@
-//The attributes for the LEVELNAME platform
+//The attributes for the defn platform
 
-export var LEVELNAME = Object();
+export function createDefinition() {
+    var defn = Object();
+    
+    //Left stuff
+    defn.leftImage = new Image();
+    defn.leftImage.src = 'address';
+    defn.px_leftWidth = 0;
+    
+    //Right stuff
+    defn.rightImage = new Image();
+    defn.rightImage.src = 'address';
+    defn.px_rightWidth = 0;
+    
+    //centre stuff
+    defn.centreImage = new Image();
+    defn.centreImage.src = 'address';
+    defn.px_centreWidth = 0;
+    
+    //Misc vars.
+    defn.verticalOffset = 0;
+    
+    defn.friction = 1; //Default friction, keep same usually.
+    defn.px_platformHeight = 45; //Keep same usually, this is the height of each platform part
+    
+    defn.px_minWidth = defn.px_leftWidth + defn.px_rightWidth; //Dont change
+    
+    //Portal Stuff
+    defn.portalWidth_px = 0;
+    defn.portalHeight_px = 0;
+    defn.portalAddress = "address";
+    
+    //set to false to hide the bounding boxes
+    defn.boundingBox = true;
 
-//Left stuff
-LEVELNAME.leftImage = new Image();
-LEVELNAME.leftImage.src = 'address';
-LEVELNAME.px_leftWidth = 0;
+    //type
+    defn.platform_type = "platform";
 
-//Right stuff
-LEVELNAME.rightImage = new Image();
-LEVELNAME.rightImage.src = 'address';
-LEVELNAME.px_rightWidth = 0;
-
-//centre stuff
-LEVELNAME.centreImage = new Image();
-LEVELNAME.centreImage.src = 'address';
-LEVELNAME.px_centreWidth = 0;
-
-//Misc vars.
-LEVELNAME.verticalOffset = 0;
-
-LEVELNAME.friction = 1; //Default friction, keep same usually.
-LEVELNAME.px_platformHeight = 45; //Keep same usually, this is the height of each platform part
-
-LEVELNAME.px_minWidth = LEVELNAME.px_leftWidth + LEVELNAME.px_rightWidth; //Dont change
-
-//Portal Stuff
-LEVELNAME.portalWidth_px = 0;
-LEVELNAME.portalHeight_px = 0;
-LEVELNAME.portalAddress = "address";
-
-//set to false to hide the bounding boxes
-LEVELNAME.boundingBox = true;
+    return defn;
+}

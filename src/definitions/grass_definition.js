@@ -1,6 +1,8 @@
 //The attributes for the grass platform
 
-export var grass = Object();
+import {createDefinition} from "./blank_definition.js";
+
+export var grass = createDefinition();
 
 //Left stuff
 grass.leftImage = new Image();

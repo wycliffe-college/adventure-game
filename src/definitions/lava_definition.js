@@ -1,5 +1,7 @@
 //The attributes for the grass platform
-export var lava = Object();
+import {createDefinition} from "./blank_definition.js";
+
+export var lava = createDefinition();
 
 //Left stuff
 lava.leftImage = new Image();
@@ -26,4 +28,6 @@ lava.px_minWidth = lava.px_leftWidth + lava.px_rightWidth;
 
 //set to false to show the bounding boxes
 lava.boundingBox = true;
+
+lava.type = "lava";
 

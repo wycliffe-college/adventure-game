@@ -1,6 +1,8 @@
 //The attributes for the ruined_forest platform
 
-export var ruined_forest = Object();
+import {createDefinition} from "./blank_definition.js";
+
+export var ruined_forest = createDefinition();
 
 //Left stuff
 ruined_forest.leftImage = new Image();
