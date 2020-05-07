@@ -31,4 +31,4 @@ ruined_forest.portalHeight_px = 0;
 ruined_forest.portalAddress = "images/door.png";
 
 //set to false to hide the bounding boxes
-ruined_forest.boundingBox = true;
+ruined_forest.boundingBox = false;
