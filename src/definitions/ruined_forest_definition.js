@@ -9,8 +9,8 @@ ruined_forest.px_leftWidth = 30;
 
 //Right stuff
 ruined_forest.rightImage = new Image();
-ruined_forest.rightImage.src = 'images/grassright.png';
-ruined_forest.px_rightWidth = 64;
+ruined_forest.rightImage.src = 'images/ruined_forest/right.png';
+ruined_forest.px_rightWidth = 30;
 
 //centre stuff
 ruined_forest.centreImage = new Image();
@@ -18,9 +18,9 @@ ruined_forest.centreImage.src = 'images/ruined_forest/centre.png';
 ruined_forest.px_centreWidth = 120;
 
 //Misc vars.
-ruined_forest.verticalOffset = 0;
+ruined_forest.verticalOffset = -10;
 
-ruined_forest.friction = 1; //Default friction, keep same usually.
+ruined_forest.friction = 5; //Default friction, keep same usually.
 ruined_forest.px_platformHeight = 45; //Keep same usually, this is the height of each platform part
 
 ruined_forest.px_minWidth = ruined_forest.px_leftWidth + ruined_forest.px_rightWidth; //Dont change
