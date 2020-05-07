@@ -27,7 +27,7 @@ export function createExplorer(world) {
             custom: (fixture, ctx, pos, size) => {
                 if (fixture == explorer.footSensor ) {
                     // don't draw the foot sensor
-                    return false;
+                    return true;
                 }
                 ctx.drawImage(img, pos.x, pos.y, size.width, size.height);
                 return true // don't draw bounding box
