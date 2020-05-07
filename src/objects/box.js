@@ -24,7 +24,7 @@ export function createBox(world, position, width, height, density=1, imageAddres
         box.render = {
             custom: (fixture, ctx, pos, size) => {
                 ctx.drawImage(img, pos.x, pos.y, size.width, size.height);
-                return true // don't draw bounding box
+                return true; // don't draw bounding box
             }
         }
     };
