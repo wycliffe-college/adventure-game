@@ -5,12 +5,14 @@ import { Vec2, Box } from "./planck-module.js";
 import { doKeyDown , doKeyUp , applyImpulse , desiredVerticalVelocity, desiredHorizontalVelocity } from './movement.js';
 import { createCanvas, createContext, getClipRect, clearCanvas} from "./canvas.js";
 import {scale} from "./scale.js"
+import {gotObtainable} from "./objects/obtainable.js"
 
 //Import available levels
-import { createLevel as defaultLevel } from './default_level.js';
-import { createLevel as brendanLevel } from './brendans-level.js';
-import { createLevel as josiaLevel } from './Josias-orginal-level.js';
-var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel };
+import { createLevel as defaultLevel } from './levels/default_level.js';
+import { createLevel as brendanLevel } from './levels/brendans-level.js';
+import { createLevel as ParkerLevel } from './levels/Parker_level.js';
+import { createLevel as josiaLevel } from './levels/Josias-orginal-level.js';
+var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel , "Parker" :ParkerLevel};
 
 // Function to parse the url data into parameters
 function parseHtmlParameters()
@@ -38,6 +40,11 @@ function createWorld(params) {
 
     // create the ground
     world.door = levels[params.level](world);
+
+
+    //Create the obtainable (key/coin, whatever) object in world
+    world.obtainable = levels[params.level](world);
+
 
     return world;
 }
@@ -68,6 +75,14 @@ world.on('begin-contact', function(contact) {
         if ((fixtureA === world.door.doorSensor && fixtureB === explorer.mainFixture) ||
             (fixtureB === world.door.doorSensor && fixtureA === explorer.mainFixture)) {
             window.location = "game.html?level=brendan";
+        }
+    }
+    if( world.obtainable != undefined ) { //I.e. if there is an object like this in the world.
+        console.log("program knows that an obtainable exists");
+        if ((fixtureA === world.obtainable.obSensor && fixtureB === explorer.mainFixture) ||
+            (fixtureB === world.obtainable.obSensor && fixtureA === explorer.mainFixture)) {
+            console.log("Program has sensed contact, running the function");
+            gotObtainable(world, true); //Tells the game that the obtainable has been collected.
         }
     }
 });

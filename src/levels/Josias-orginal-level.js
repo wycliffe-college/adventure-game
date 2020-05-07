@@ -1,4 +1,4 @@
-import { Vec2, Box } from "./planck-module.js";
+import { Vec2, Box } from "../planck-module.js";
 //Josia's Level, based upon Brendan's Level, based upon default_level.js
 
 const friction = 15.0;

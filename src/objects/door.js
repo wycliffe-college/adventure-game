@@ -1,6 +1,6 @@
-import {px2phy,phy2px} from "./scale.js";
-import {Vec2} from "./planck-module.js"
-import {Box} from "./planck-module.js";
+import {px2phy,phy2px} from "../scale.js";
+import {Vec2} from "../planck-module.js"
+import {Box} from "../planck-module.js";
 
 const px_width=144;
 const px_height=160;
