@@ -20,6 +20,10 @@ export function createExplorer(world) {
         shape: Box(1.2,0.1, Vec2(0 , -2 ), 0),
         isSensor: false
     })
+    explorer.hooksense = explorer.createFixture({
+        shape: Box(1.2,0.1, Vec2(0 , -1.95 ), 0),
+        isSensor: true
+    })
 
     //remember the number of foot contacts
     explorer.numFootContacts = 0;
@@ -30,7 +34,7 @@ export function createExplorer(world) {
     img.onload = () => {
         explorer.render = {
             custom: (fixture, ctx, pos, size) => {
-                if (fixture == explorer.footSensor || fixture == explorer.hook )  {
+                if (fixture == explorer.footSensor || fixture == explorer.hook || fixture == explorer.hooksense )  {
                     // don't draw the foot sensor
                     return true;
                 }

@@ -10,11 +10,18 @@ export function setupCollisionHandling(world ) {
         if (fixtureA === world.explorer.footSensor || fixtureB === world.explorer.footSensor ) {
             world.explorer.numFootContacts += 1;
         }
+        if (fixtureA === world.explorer.hooksense || fixtureB === world.explorer.hooksense ) {
+            world.explorer.numFootContacts += 1;
+        }
 
         // detect when we reach the door
         if( world.door != undefined ) {
             if ( (fixtureA === world.door.doorSensor && fixtureB === world.explorer.mainFixture) ||
                  (fixtureB === world.door.doorSensor && fixtureA === world.explorer.mainFixture) )  {
+                window.location = "game.html?level=brendan";
+            }
+            if ( (fixtureA === world.door.doorSensor && fixtureB === world.explorer.hook) ||
+                (fixtureB === world.door.doorSensor && fixtureA === world.explorer.hook) )  {
                 window.location = "game.html?level=brendan";
             }
         }
@@ -41,6 +48,9 @@ export function setupCollisionHandling(world ) {
 
         // count floor contacts
         if (fixtureA === world.explorer.footSensor || fixtureB === world.explorer.footSensor ) {
+            world.explorer.numFootContacts -= 1;
+        }
+        if (fixtureA === world.explorer.hooksense || fixtureB === world.explorer.hooksense ) {
             world.explorer.numFootContacts -= 1;
         }
     });
