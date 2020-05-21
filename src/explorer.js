@@ -21,7 +21,7 @@ export function createExplorer(world) {
         isSensor: false
     })
     explorer.hooksense = explorer.createFixture({
-        shape: Box(1.2,0.1, Vec2(0 , -1.95 ), 0),
+        shape: Box(1.15,0.1, Vec2(0 , -1.95 ), 0),
         isSensor: true
     })
 

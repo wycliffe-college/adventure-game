@@ -12,7 +12,8 @@ import { createLevel as defaultLevel } from './levels/default_level.js';
 import { createLevel as brendanLevel } from './levels/brendans-level.js';
 import { createLevel as ParkerLevel } from './levels/Parker_level.js';
 import { createLevel as josiaLevel } from './levels/Josias-orginal-level.js';
-var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel , "Parker" :ParkerLevel};
+import { createLevel as jamesLevel } from './levels/james_level.js';
+var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel , "Parker" :ParkerLevel, "james" :jamesLevel };
 
 console.log( "hello")
 
