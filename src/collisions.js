@@ -21,7 +21,9 @@ export function setupCollisionHandling(world ) {
                 window.location = "game.html?level=brendan";
             }
             if ( (fixtureA === world.door.doorSensor && fixtureB === world.explorer.hook) ||
-                (fixtureB === world.door.doorSensor && fixtureA === world.explorer.hook) )  {
+                (fixtureB === world.door.doorSensor && fixtureA === world.explorer.hook) ||
+                (fixtureA === world.door.doorSensor && fixtureB === world.explorer.wallslide) ||
+                (fixtureB === world.door.doorSensor && fixtureA === world.explorer.wallslide))  {
                 window.location = "game.html?level=brendan";
             }
         }
