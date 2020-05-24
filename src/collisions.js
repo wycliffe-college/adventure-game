@@ -28,7 +28,10 @@ export function setupCollisionHandling(world ) {
 
         // detect if we touch lava
         if( ( fixtureA === world.explorer.mainFixture && fixtureB.getBody().platform_type === "lava" ) ||
-            ( fixtureB === world.explorer.mainFixture && fixtureA.getBody().platform_type === "lava" ) ) {
+            ( fixtureB === world.explorer.mainFixture && fixtureA.getBody().platform_type === "lava" ) ||
+            ( fixtureA === world.explorer.wallslide && fixtureB.getBody().platform_type === "lava" ) ||
+            ( fixtureB === world.explorer.wallslide && fixtureA.getBody().platform_type === "lava" )
+        ) {
             location.reload() ;
         }
 

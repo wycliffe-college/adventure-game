@@ -9,14 +9,14 @@ export function createLevel(world) {
     createPlatform(world, -10,-4, 5,grass);
     createPlatform(world, 0,0, 10,grass);
     createPlatform(world, 50,-8, 50,grass);
-    const wall = world.createBody(Vec2(-10,0));
-    wall.createFixture(planck.Box(2,10,0))
+    const wall = world.createBody(Vec2(-5,0));
+    wall.createFixture(planck.Box(2,5,0))
     wall . edge = wall.createFixture({
-        shape: Box(5, 10, 2.1, 0),
+        shape: Box(5, 5, 2.1, 0),
         isSensor: false,
-        friction: 0
+        friction: 1
     })
-    createBox(world, Vec2(5,-3),2,2, 10);
+    createBox(world, Vec2(-5,-7),2,2, 10);
 
 
     createLava(world, 0, 10, 40);
@@ -36,7 +36,7 @@ export function createLevel(world) {
     var segmentJointDef = {};
     segmentJointDef.collideConnected = false;
 
-    var N = 10;
+    var N = 17;
     var y = -25.0;
 
     var prevBody = wall;
@@ -47,7 +47,7 @@ export function createLevel(world) {
         bd.position = Vec2(0.5 + 1.0 * i, y);
         if (i === N - 1) {
             shape = planck.Box(1.5, 1.5);
-            segmentDef.density = 100.0;
+            segmentDef.density = 10.0;
             segmentDef.filterCategoryBits = 0x0002;
             bd.position = Vec2(1.0 * i, y);
             bd.angularDamping = 0.4;
@@ -63,15 +63,6 @@ export function createLevel(world) {
         prevBody = body;
     }
 
-    var ropeJointDef = {};
-    ropeJointDef.maxLength = N - 1.0 + 0.01;
-    ropeJointDef.localAnchorA = Vec2(-10.0, y);
-    ropeJointDef.localAnchorB = Vec2(-10, 0);
-    var rope = world.createJoint(planck.RopeJoint(ropeJointDef, wall, prevBody));
-
-
-
-    rope = world.createJoint(planck.RopeJoint(ropeJointDef, wall, prevBody));
 
     return door;
 }

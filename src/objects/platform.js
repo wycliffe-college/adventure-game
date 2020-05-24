@@ -13,11 +13,7 @@ export function createPlatform(world, xPos, yPos, width, definition) {
         const platform = world.createBody(Vec2(xPos,yPos));
         platform.platform_type = definition.type;
         platform.createFixture(planck.Box(px2phy(left_definition.px_leftWidth / 2), px2phy(left_definition.px_platformHeight / 2)), 1.0)
-        platform.edge = platform.createFixture({
-            shape: Box(0.1,px2phy(left_definition.px_platformHeight / 2), Vec2(-px2phy(left_definition.px_leftWidth / 2 )-0.01 ,0 ), 0),
-            isSensor: false,
-            friction: 0
-        })
+
         platform.render = {
 
             custom: (fixture, ctx, pos, size, custom_definition=left_definition) => {
@@ -55,11 +51,7 @@ export function createPlatform(world, xPos, yPos, width, definition) {
         const platform = world.createBody(Vec2(xPos,yPos));
         platform.platform_type = definition.type;
         platform.createFixture(planck.Box(px2phy(right_definition.px_rightWidth / 2), px2phy(right_definition.px_platformHeight / 2)), 1.0);
-        platform.edger = platform.createFixture({
-            shape: Box(0.1,px2phy(right_definition.px_platformHeight / 2), Vec2(px2phy(right_definition.px_rightWidth / 2 )+0.01 ,0 ), 0),
-            isSensor: false,
-            friction: 0
-        })
+        
         platform.render = {
             custom: (fixture, ctx, pos, size, custom_definition=right_definition) => {
                 if (fixture == platform.edger )  {

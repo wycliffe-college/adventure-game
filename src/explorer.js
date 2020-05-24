@@ -18,11 +18,17 @@ export function createExplorer(world) {
 
     explorer.hook = explorer.createFixture({
         shape: Box(1.2,0.1, Vec2(0 , -2 ), 0),
-        isSensor: false
+        isSensor: false,
+        friction: false
     })
     explorer.hooksense = explorer.createFixture({
         shape: Box(1.15,0.1, Vec2(0 , -1.95 ), 0),
         isSensor: true
+    })
+    explorer.wallslide = explorer.createFixture({
+        shape: Box(1.02,2, Vec2(0,0),0),
+        isSensor: false,
+        friction: false
     })
 
     //remember the number of foot contacts
