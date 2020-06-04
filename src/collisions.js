@@ -10,6 +10,9 @@ export function setupCollisionHandling(world ) {
         if (fixtureA === world.explorer.footSensor || fixtureB === world.explorer.footSensor ) {
             world.explorer.numFootContacts += 1;
         }
+        if (fixtureA === world.explorer.hooksense || fixtureB === world.explorer.hooksense ) {
+            world.explorer.numFootContacts += 1;
+        }
 
         // detect when we reach the door
         if( world.door != undefined ) {
@@ -17,11 +20,20 @@ export function setupCollisionHandling(world ) {
                  (fixtureB === world.door.doorSensor && fixtureA.getBody() === world.explorer) )  {
                 window.location = "game.html?level=brendan";
             }
+            if ( (fixtureA === world.door.doorSensor && fixtureB === world.explorer.hook) ||
+                (fixtureB === world.door.doorSensor && fixtureA === world.explorer.hook) ||
+                (fixtureA === world.door.doorSensor && fixtureB === world.explorer.wallslide) ||
+                (fixtureB === world.door.doorSensor && fixtureA === world.explorer.wallslide))  {
+                window.location = "game.html?level=brendan";
+            }
         }
 
         // detect if we touch lava
         if( ( fixtureA === world.explorer.mainFixture && fixtureB.getBody().platform_type === "lava" ) ||
-            ( fixtureB === world.explorer.mainFixture && fixtureA.getBody().platform_type === "lava" ) ) {
+            ( fixtureB === world.explorer.mainFixture && fixtureA.getBody().platform_type === "lava" ) ||
+            ( fixtureA === world.explorer.wallslide && fixtureB.getBody().platform_type === "lava" ) ||
+            ( fixtureB === world.explorer.wallslide && fixtureA.getBody().platform_type === "lava" )
+        ) {
             location.reload() ;
         }
 
@@ -41,6 +53,9 @@ export function setupCollisionHandling(world ) {
 
         // count floor contacts
         if (fixtureA === world.explorer.footSensor || fixtureB === world.explorer.footSensor ) {
+            world.explorer.numFootContacts -= 1;
+        }
+        if (fixtureA === world.explorer.hooksense || fixtureB === world.explorer.hooksense ) {
             world.explorer.numFootContacts -= 1;
         }
     });
