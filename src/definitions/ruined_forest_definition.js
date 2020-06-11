@@ -35,4 +35,4 @@ ruined_forest.portalHeight_px = 192;
 
 
 //set to false to hide the bounding boxes
-ruined_forest.boundingBox = false;
+ruined_forest.boundingBox = true;
