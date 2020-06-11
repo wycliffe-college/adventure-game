@@ -5,7 +5,7 @@ import {ruined_forest} from "../definitions/ruined_forest_definition.js";
 import {createBox} from '../objects/box.js';
 import {createDoor} from "../objects/door.js";
 import {createObtainable} from "../objects/obtainable.js"
-import {createLava} from "../objects/lava";
+import {createLava} from "../objects/lava.js";
 
 
 //Constant Setting
@@ -34,7 +34,7 @@ export function createLevel(world) {
     createPlatform(world, -3, -2, 1, ruined_forest); //single platform attached to door plat right
 
 
-    createLava(world, 0, 10, 40);
+    createLava(world, 0, 30, 100);
 
     //createObtainable(world, Vec2(0,0));
 
