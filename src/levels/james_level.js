@@ -4,7 +4,7 @@ import { createLava } from "../objects/lava.js";
 import {grass} from "../definitions/grass_definition.js";
 import {createDoor} from "../objects/door.js"
 import {createBox} from "../objects/box.js";
-import {createDefinition} from "../definitions/blank_definition.js";
+import {defaultObject} from "../obj_definitions/blank_object_defn.js";
 
 
 export function createLevel(world) {
@@ -17,8 +17,8 @@ export function createLevel(world) {
         shape: Box(5, 5, 2.1, 0),
         isSensor: false,
         friction: 1
-    })
-    createBox(world, Vec2(-5,-7),2,2, 10, createDefinition());
+    });
+    createBox(world, Vec2(-5,-7),defaultObject);
 
 
     createLava(world, 0, 10, 40);
