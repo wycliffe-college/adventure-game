@@ -27,10 +27,12 @@ export function createDefinition() {
     defn.px_minWidth = defn.px_leftWidth + defn.px_rightWidth; //Dont change
     
     //Portal Stuff
+    defn.portalImage = new Image();
+    defn.portalImage.src = '';
     defn.portalWidth_px = 0;
     defn.portalHeight_px = 0;
-    defn.portalAddress = "address";
-    
+
+
     //set to false to hide the bounding boxes
     defn.boundingBox = true;
 

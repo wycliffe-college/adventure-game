@@ -28,9 +28,10 @@ grass.px_platformHeight = 45;
 grass.px_minWidth = grass.px_leftWidth + grass.px_rightWidth;
 
 //Portal Stuff
-grass.portalWidth_px = 30;
-grass.portalHeight_px = 30;
-grass.portalAddress = "images/door.png";
+grass.portalImage = new Image();
+grass.portalImage.src = 'images/door.png';
+grass.portalWidth_px = 200;
+grass.portalHeight_px = 200;
 
 
 

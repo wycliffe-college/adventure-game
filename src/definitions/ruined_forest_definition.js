@@ -28,9 +28,11 @@ ruined_forest.px_platformHeight = 45; //Keep same usually, this is the height of
 ruined_forest.px_minWidth = ruined_forest.px_leftWidth + ruined_forest.px_rightWidth; //Dont change
 
 //Portal Stuff
-ruined_forest.portalWidth_px = 0;
-ruined_forest.portalHeight_px = 0;
-ruined_forest.portalAddress = "images/door.png";
+ruined_forest.portalImage = new Image();
+ruined_forest.portalImage.src = "images/portal.gif";
+ruined_forest.portalWidth_px = 192;
+ruined_forest.portalHeight_px = 192;
+
 
 //set to false to hide the bounding boxes
 ruined_forest.boundingBox = false;

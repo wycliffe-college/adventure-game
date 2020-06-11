@@ -12,6 +12,6 @@ export function createLevel(world) {
 
     createLava(world, 0, 10, 40);
 
-    var door = createDoor(world , Vec2(25,-12) );
+    var door = createDoor(world , Vec2(25,-12),grass);
     return door;
 }
