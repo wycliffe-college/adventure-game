@@ -8,6 +8,11 @@ export function createDoor(world, position, definition) {
     door.createFixture(planck.Box(px2phy(definition.portalWidth_px / 2), px2phy(definition.portalHeight_px / 2)), 0.0);
     door.drawingLayer = 1;
 
+    door.contactHandler = function( ) {
+        console.log( "touching the door" );
+        window.location = "game.html?level=brendan";
+    }
+
     door.render = {
         custom: (fixture, ctx, pos, size, def = definition) => {
             if (def.portalImage.complete) {

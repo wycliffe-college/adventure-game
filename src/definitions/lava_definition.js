@@ -31,3 +31,8 @@ lava.boundingBox = true;
 
 lava.type = "lava";
 
+lava.contactHandler = function() {
+    console.log("Touching lava");
+    location.reload() ;
+}
+

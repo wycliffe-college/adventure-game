@@ -12,6 +12,7 @@ export function createPlatform(world, xPos, yPos, width, definition) {
     function left(world, xPos, yPos, left_definition) {
         const platform = world.createBody(Vec2(xPos,yPos));
         platform.platform_type = definition.type;
+        platform.contactHandler = left_definition.contactHandler ;
         platform.createFixture(planck.Box(px2phy(left_definition.px_leftWidth / 2), px2phy(left_definition.px_platformHeight / 2)), 1.0)
 
         platform.render = {
@@ -32,6 +33,7 @@ export function createPlatform(world, xPos, yPos, width, definition) {
     function centre(world, xPos, yPos, centre_definition) {
         const platform = world.createBody(Vec2(xPos,yPos));
         platform.platform_type = definition.type;
+        platform.contactHandler = centre_definition.contactHandler ;
         platform.createFixture(planck.Box(px2phy(centre_definition.px_centreWidth / 2), px2phy(centre_definition.px_platformHeight / 2)), 1.0);
         platform.render = {
             custom: (fixture, ctx, pos, size, custom_definition=centre_definition) => {
@@ -48,6 +50,7 @@ export function createPlatform(world, xPos, yPos, width, definition) {
     function right(world, xPos, yPos, right_definition) {
         const platform = world.createBody(Vec2(xPos,yPos));
         platform.platform_type = definition.type;
+        platform.contactHandler = right_definition.contactHandler ;
         platform.createFixture(planck.Box(px2phy(right_definition.px_rightWidth / 2), px2phy(right_definition.px_platformHeight / 2)), 1.0);
         
         platform.render = {

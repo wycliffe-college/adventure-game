@@ -39,5 +39,8 @@ export function createDefinition() {
     //type
     defn.platform_type = "platform";
 
+    //contact handler
+    defn.contactHandler = function( ) { };
+
     return defn;
 }
