@@ -15,10 +15,8 @@ export function createPlatform(world, xPos, yPos, width, definition) {
         platform.createFixture(planck.Box(px2phy(left_definition.px_leftWidth / 2), px2phy(left_definition.px_platformHeight / 2)), 1.0)
 
         platform.render = {
-
             custom: (fixture, ctx, pos, size, custom_definition=left_definition) => {
                 if (fixture == platform.edge )  {
-                    // don't draw the foot sensor
                     return custom_definition.boundingBox;
                 }
                 //console.log(custom_definition);

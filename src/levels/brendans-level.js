@@ -24,7 +24,11 @@ export function createLevel(world) {
     createPlatform(world, 6, 2, 5, ruined_forest); //Upper medium sized platform over main spawn
     createPlatform(world, -26, 2, 2, ruined_forest); //single platform to hold box from falling off
     createPlatform(world, -9, -4, 10, ruined_forest); //platform with door on it
-    createBox(world, Vec2(-16,2),2,2, 10);
+    createBox(world, Vec2(-16,2),1,1.5, 50, "./images/barrel.png", ruined_forest);
+    createBox(world, Vec2(5,1),1,1.5, 50, "./images/barrel.png", ruined_forest);
+    createBox(world, Vec2(10,5),1,1.5, 50, "./images/barrel.png", ruined_forest);
+    createBox(world, Vec2(11,5),1,1.5, 50, "./images/barrel.png", ruined_forest);
+    createBox(world, Vec2(9,8),1,1.5, 50, "./images/barrel.png", ruined_forest);
     createPlatform(world, -15.5, -3, 1, ruined_forest); //single platform attached to door plat left
     createPlatform(world, -3, -2, 1, ruined_forest); //single platform attached to door plat right
 
@@ -32,6 +36,6 @@ export function createLevel(world) {
     //createObtainable(world, Vec2(0,0));
 
 
-    return createDoor(world, Vec2(-10,-8)); //Must be called last. (??)
+    return createDoor(world, Vec2(-9,-8.2), ruined_forest); //Must be called last. (??)
 
 }

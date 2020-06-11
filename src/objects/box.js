@@ -7,7 +7,7 @@ boxes.
 - Density in definition
 */
 
-export function createBox(world, position, width, height, density=1, imageAddress="./images/Crest_White.png") {
+export function createBox(world, position, width, height, density=1, imageAddress="./images/Crest_White.png", definition) {
     console.log( "box")
     //Make the platform as an object
     const box = world.createDynamicBody(position);
@@ -22,9 +22,9 @@ export function createBox(world, position, width, height, density=1, imageAddres
     //When the image loads, run the function...
     img.onload = () => {
         box.render = {
-            custom: (fixture, ctx, pos, size) => {
+            custom: (fixture, ctx, pos, size, custom_def=definition) => {
                 ctx.drawImage(img, pos.x, pos.y, size.width, size.height);
-                return true; // don't draw bounding box
+                return custom_def.boundingBox; // don't draw bounding box
             }
         }
     };

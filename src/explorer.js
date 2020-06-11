@@ -42,11 +42,11 @@ export function createExplorer(world) {
             custom: (fixture, ctx, pos, size) => {
                 if (fixture == explorer.footSensor || fixture == explorer.hook || fixture == explorer.hooksense )  {
                     // don't draw the foot sensor
-                    return true;
+                    return false;
                 }
 
                 ctx.drawImage(img, pos.x, pos.y, size.width, size.height);
-                return true // don't draw bounding box
+                return false; // don't draw bounding box
             }
         }
     };
