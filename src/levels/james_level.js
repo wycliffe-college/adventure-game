@@ -4,6 +4,8 @@ import { createLava } from "../objects/lava.js";
 import {grass} from "../definitions/grass_definition.js";
 import {createDoor} from "../objects/door.js"
 import {createBox} from "../objects/box.js";
+import {createDefinition} from "../definitions/blank_definition.js";
+
 
 export function createLevel(world) {
     createPlatform(world, -10,-4, 5,grass);
@@ -16,20 +18,14 @@ export function createLevel(world) {
         isSensor: false,
         friction: 1
     })
-    createBox(world, Vec2(-5,-7),2,2, 10);
+    createBox(world, Vec2(-5,-7),2,2, 10, createDefinition());
 
 
     createLava(world, 0, 10, 40);
 
-    var door = createDoor(world , Vec2(25,-12) );
-
-
-
-
-
     var segmentDef = {};
-    segmentDef.density = 20.0;
-    segmentDef.friction = 0.2;
+    segmentDef.density = 1000;
+    segmentDef.friction = 0;
     segmentDef.filterCategoryBits = 0x0001;
     segmentDef.filterMaskBits = 0xFFFF & ~0x0002;
 
@@ -50,7 +46,7 @@ export function createLevel(world) {
             segmentDef.density = 10.0;
             segmentDef.filterCategoryBits = 0x0002;
             bd.position = Vec2(1.0 * i, y);
-            bd.angularDamping = 0.4;
+            bd.angularDamping = 10;
         }
 
         var body = world.createBody(bd);
@@ -64,5 +60,6 @@ export function createLevel(world) {
     }
 
 
+    var door = createDoor(world , Vec2(25,-12),grass);
     return door;
 }

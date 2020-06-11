@@ -36,7 +36,7 @@ function parseHtmlParameters()
 }
 
 function createWorld(params) {
-    console.log( "world")
+    console.log( "world");
     // initialise the world with gravity towards the bottom of the screen
     var world = new planck.World({
         gravity : Vec2(0, 40)
