@@ -13,9 +13,7 @@ import { createLevel as brendanLevel } from './levels/brendans-level.js';
 import { createLevel as ParkerLevel } from './levels/Parker_level.js';
 import { createLevel as josiaLevel } from './levels/Josias-orginal-level.js';
 import { createLevel as jamesLevel } from './levels/james_level.js';
-var levels = { "default" : defaultLevel , "josia":josiaLevel , "brendan" :brendanLevel , "Parker" :ParkerLevel, "james" :jamesLevel };
-
-console.log( "hello")
+var levels = { "default" : defaultLevel , "brendan" :brendanLevel , "james" :jamesLevel };
 
 // Function to parse the url data into parameters
 function parseHtmlParameters()
@@ -36,7 +34,7 @@ function parseHtmlParameters()
 }
 
 function createWorld(params) {
-    console.log( "world");
+
     // initialise the world with gravity towards the bottom of the screen
     var world = new planck.World({
         gravity : Vec2(0, 40)
@@ -45,101 +43,114 @@ function createWorld(params) {
     // create the ground
     world.door = levels[params.level](world);
 
-    //Create the obtainable (key/coin, whatever) object in world
-    //world.obtainable = levels[params.level](world);
+    world.explorer = createExplorer(world);
+
+    // setup collision handling
+    setupCollisionHandling(world);
+
+    //creating background
+    const backgroundimg = new Image();
+    backgroundimg.src = "images/seamlessmountain.jpg";
+    backgroundimg.onload = () => {
+        world.background=backgroundimg;
+    };
+    const foregroundimg = new Image();
+    foregroundimg.src = "images/foreground.png";
+    foregroundimg.onload = () => {
+        world.foreground=foregroundimg;
+    };
 
     return world;
 }
 
-// canvas and graphics context
-const canvas = createCanvas();
-const ctx = createContext(canvas);
+function setupKeyBindings() {
+    // setup key bindings
+    document.onkeydown = doKeyDown;
+    document.onkeyup = doKeyUp;
+}
 
-// key bindings
-document.onkeydown = doKeyDown ;
-document.onkeyup = doKeyUp ;
+function createGraphicsRendererRunner(world) {
+    var graphics = new Object();
+    // create the canvas and graphics context
+    graphics.canvas = createCanvas();
+    graphics.ctx = createContext(graphics.canvas);
+
+    // create graphics a renderer
+    graphics.renderer = new Renderer(world, graphics.ctx, {
+        scale: scale,
+    });
+
+    graphics.renderer.clear = (canvas, ctx) => {};
+
+    // create the graphics main loop (runner)
+    graphics.runner = new Runner(world, {
+        speed: 1,
+        fps: 60,
+    });
+
+    graphics.initialtrans = graphics.ctx.getTransform();
+    return graphics ;
+}
+
+function renderCore( graphics, world ){
+    const ctx = graphics.ctx ;
+    const canvas = graphics.canvas ;
+
+    // Move the explorer
+    applyImpulse(world.explorer);
+
+    //get the current clip rect
+    var cliprect = getClipRect(ctx);
+
+    // clear the canvas
+    clearCanvas(ctx);
+
+    // draw the background
+    var pos = world.explorer.getPosition();
+    ctx.setTransform(graphics.initialtrans.a,graphics.initialtrans.b,graphics.initialtrans.c,graphics.initialtrans.d,
+        graphics.initialtrans.e-(pos.x*scale), graphics.initialtrans.f-(pos.y*scale));
+    //console.log( ctx.getTransform());
+
+    if(world.background) {
+        var cliprectpos = cliprect.x+(cliprect.width / 2)
+        var ratio = world.background.width / world.background.height
+        var backgroundrenderpos = cliprectpos / (canvas.height* ratio) /50
+
+
+        var backgroundrenderposleft = (Math.floor(backgroundrenderpos)) * (canvas.height* ratio)
+        var backgroundrenderposright = (Math.ceil(backgroundrenderpos)) * (canvas.height*ratio)
+        if((backgroundrenderpos-Math.floor(backgroundrenderpos))<0.5 ){
+            var backgroundrenderposleft = ((Math.floor(backgroundrenderpos))*canvas.height* ratio)-(canvas.height*ratio)
+            var backgroundrenderposright = (Math.floor(backgroundrenderpos))*(canvas.height* ratio)
+
+        }
+        ctx.drawImage(world.background, backgroundrenderposleft+(((pos.x*scale*50)-pos.x*scale)/50), (-canvas.height / 2)+(pos.y*scale)*0.9, canvas.height* ratio, canvas.height)
+        ctx.drawImage(world.background, backgroundrenderposright+(((pos.x*scale*50)-pos.x*scale)/50), -canvas.height / 2+(pos.y*scale)*0.9, canvas.height* ratio, canvas.height)
+    }
+    if(world.foreground) {
+        var cliprectpos = cliprect.x+(cliprect.width / 1.2)
+        var ratio = world.foreground.width / world.foreground.height
+        var foregroundrenderpos = cliprectpos / (canvas.height* ratio/1.2)/10
+        var renderleft = foregroundrenderpos-1
+
+        var backgroundrenderposmid =   Math.floor(foregroundrenderpos)* (canvas.height* ratio/1.2)
+        var backgroundrenderposleft = (Math.floor(renderleft)) *(canvas.height* ratio/1.2)
+        var backgroundrenderposright = Math.ceil(foregroundrenderpos)*(canvas.height* ratio/1.2)
+
+        ctx.drawImage(world.foreground, backgroundrenderposleft+(((pos.x*scale*5)-pos.x*scale)/5), -canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5) +(canvas.height/4), canvas.height* ratio/1.2, canvas.height/1.2)
+        ctx.drawImage(world.foreground, backgroundrenderposright+(((pos.x*scale*5)-pos.x*scale)/5),-canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5) +(canvas.height/4), canvas.height* ratio/1.2 , canvas.height/1.2)
+        ctx.drawImage(world.foreground, backgroundrenderposmid+(((pos.x*scale*5)-pos.x*scale)/5), -canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5)+(canvas.height/4) ,canvas.height* ratio/1.2, canvas.height/1.2)
+    }
+    graphics.renderer.renderWorld(cliprect)
+}
 
 // create the world
 var params = parseHtmlParameters();
-const world = createWorld( params );
-world.explorer = createExplorer(world);
-
-// setup collision handling
-setupCollisionHandling(world);
-
-//creating background
-const backgroundimg = new Image();
-backgroundimg.src = "images/seamlessmountain.jpg";
-backgroundimg.onload = () => {
-    world.background=backgroundimg;
-};
-const foregroundimg = new Image();
-foregroundimg.src = "images/foreground.png";
-foregroundimg.onload = () => {
-    world.foreground=foregroundimg;
-};
-
-// create a renderer
-const renderer = new Renderer(world, ctx, {
-    scale: scale
-});
-
-renderer.clear = (canvas, ctx) => {};
-
-// create the runner
-const runner = new Runner(world, {
-    speed: 1,
-    fps: 60,
-});
+var world = createWorld( params );
+var graphics = createGraphicsRendererRunner(world);
+setupKeyBindings() ;
 
 // start the runner
-var trans= ctx.getTransform();
-runner.start(
-    () => {
-        // Move the explorer
-        applyImpulse(world.explorer);
-
-        //get the current clip rect
-        var cliprect = getClipRect(ctx);
-
-        // clear the canvas
-        clearCanvas(ctx);
-
-        // draw the background
-        var pos = world.explorer.getPosition();
-        ctx.setTransform(trans.a,trans.b,trans.c,trans.d,trans.e-(pos.x*scale), trans.f-(pos.y*scale));
-        //console.log( ctx.getTransform());
-
-        if(world.background) {
-            var cliprectpos = cliprect.x+(cliprect.width / 2)
-            var ratio = backgroundimg.width / backgroundimg .height
-            var backgroundrenderpos = cliprectpos / (canvas.height* ratio) /50
-
-
-            var backgroundrenderposleft = (Math.floor(backgroundrenderpos)) * (canvas.height* ratio)
-            var backgroundrenderposright = (Math.ceil(backgroundrenderpos)) * (canvas.height*ratio)
-            if((backgroundrenderpos-Math.floor(backgroundrenderpos))<0.5 ){
-                var backgroundrenderposleft = ((Math.floor(backgroundrenderpos))*canvas.height* ratio)-(canvas.height*ratio)
-                var backgroundrenderposright = (Math.floor(backgroundrenderpos))*(canvas.height* ratio)
-
-            }
-            ctx.drawImage(world.background, backgroundrenderposleft+(((pos.x*scale*50)-pos.x*scale)/50), (-canvas.height / 2)+(pos.y*scale)*0.9, canvas.height* ratio, canvas.height)
-            ctx.drawImage(world.background, backgroundrenderposright+(((pos.x*scale*50)-pos.x*scale)/50), -canvas.height / 2+(pos.y*scale)*0.9, canvas.height* ratio, canvas.height)
-        }
-        if(world.foreground) {
-            var cliprectpos = cliprect.x+(cliprect.width / 1.2)
-            var ratio = foregroundimg.width / foregroundimg .height
-            var foregroundrenderpos = cliprectpos / (canvas.height* ratio/1.2)/10
-            var renderleft = foregroundrenderpos-1
-
-            var backgroundrenderposmid =   Math.floor(foregroundrenderpos)* (canvas.height* ratio/1.2)
-            var backgroundrenderposleft = (Math.floor(renderleft)) *(canvas.height* ratio/1.2)
-            var backgroundrenderposright = Math.ceil(foregroundrenderpos)*(canvas.height* ratio/1.2)
-
-            ctx.drawImage(world.foreground, backgroundrenderposleft+(((pos.x*scale*5)-pos.x*scale)/5), -canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5) +(canvas.height/4), canvas.height* ratio/1.2, canvas.height/1.2)
-            ctx.drawImage(world.foreground, backgroundrenderposright+(((pos.x*scale*5)-pos.x*scale)/5),-canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5) +(canvas.height/4), canvas.height* ratio/1.2 , canvas.height/1.2)
-            ctx.drawImage(world.foreground, backgroundrenderposmid+(((pos.x*scale*5)-pos.x*scale)/5), -canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5)+(canvas.height/4) ,canvas.height* ratio/1.2, canvas.height/1.2)
-        }
-        renderer.renderWorld(cliprect)
-    });
+graphics.runner.renderer( function() { renderCore( graphics , world ); } )
+graphics.runner.start( );
 

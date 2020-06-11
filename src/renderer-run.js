@@ -58,6 +58,10 @@ class Runner {
             this.runId = null
         }
     }
+
+    renderer( render) {
+        this.render = render ;
+    }
 }
 
 export { Runner }
