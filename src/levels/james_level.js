@@ -21,15 +21,15 @@ export function createLevel(world) {
 
     createLava(world, 0, 10, 40);
 
-    var door = createDoor(world , Vec2(25,-12) );
+
 
 
 
 
 
     var segmentDef = {};
-    segmentDef.density = 20.0;
-    segmentDef.friction = 0.2;
+    segmentDef.density = 1000;
+    segmentDef.friction = 0;
     segmentDef.filterCategoryBits = 0x0001;
     segmentDef.filterMaskBits = 0xFFFF & ~0x0002;
 
@@ -50,7 +50,7 @@ export function createLevel(world) {
             segmentDef.density = 10.0;
             segmentDef.filterCategoryBits = 0x0002;
             bd.position = Vec2(1.0 * i, y);
-            bd.angularDamping = 0.4;
+            bd.angularDamping = 10;
         }
 
         var body = world.createBody(bd);
