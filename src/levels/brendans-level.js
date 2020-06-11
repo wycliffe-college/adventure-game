@@ -34,8 +34,11 @@ export function createLevel(world) {
     createPlatform(world, -3, -2, 1, ruined_forest); //single platform attached to door plat right
 
 
-    //createObtainable(world, Vec2(0,0));
 
+    createPlatform(world, -30, -10, 20, ruined_forest);
+    createPlatform(world, -35, 0, 10, ruined_forest);
+    createPlatform(world, -50, -5, 2, ruined_forest);
+    createPlatform(world, -55, -8, 5, ruined_forest);
 
     return createDoor(world, Vec2(-9,-8.2), ruined_forest); //Must be called last. (??)
 
