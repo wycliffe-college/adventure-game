@@ -1,18 +1,17 @@
-import { CanvasRenderer as Renderer } from './renderer-canvas.js';
-import { Runner } from './renderer-run.js';
-import { createExplorer } from "./explorer.js";
-import { Vec2, Box } from "./planck-module.js";
-import { doKeyDown , doKeyUp , applyImpulse , desiredVerticalVelocity, desiredHorizontalVelocity } from './movement.js';
-import { createCanvas, createContext, getClipRect, clearCanvas} from "./canvas.js";
+import {CanvasRenderer as Renderer} from './renderer-canvas.js';
+import {Runner} from './renderer-run.js';
+import {createExplorer} from "./explorer.js";
+import {Vec2} from "./planck-module.js";
+import {applyImpulse, doKeyDown, doKeyUp} from './movement.js';
+import {clearCanvas, createCanvas, createContext, getClipRect} from "./canvas.js";
 import {scale} from "./scale.js"
-import { setupCollisionHandling } from "./collisions.js";
-
+import {setupCollisionHandling} from "./collisions.js";
 //Import available levels
-import { createLevel as defaultLevel } from './levels/default_level.js';
-import { createLevel as brendanLevel } from './levels/brendans-level.js';
-import { createLevel as ParkerLevel } from './levels/Parker_level.js';
-import { createLevel as josiaLevel } from './levels/Josias-orginal-level.js';
-import { createLevel as jamesLevel } from './levels/james_level.js';
+import {createLevel as defaultLevel} from './levels/default_level.js';
+import {createLevel as brendanLevel} from './levels/brendans-level.js';
+import {createLevel as jamesLevel} from './levels/james_level.js';
+import {renderBackground} from "./background.js";
+
 var levels = { "default" : defaultLevel , "brendan" :brendanLevel , "james" :jamesLevel };
 
 // Function to parse the url data into parameters
@@ -34,7 +33,6 @@ function parseHtmlParameters()
 }
 
 function createWorld(params) {
-
     // initialise the world with gravity towards the bottom of the screen
     var world = new planck.World({
         gravity : Vec2(0, 40)
@@ -111,36 +109,10 @@ function renderCore( graphics, world ){
         graphics.initialtrans.e-(pos.x*scale), graphics.initialtrans.f-(pos.y*scale));
     //console.log( ctx.getTransform());
 
-    if(world.background) {
-        var cliprectpos = cliprect.x+(cliprect.width / 2)
-        var ratio = world.background.width / world.background.height
-        var backgroundrenderpos = cliprectpos / (canvas.height* ratio) /50
+    // draw the background
+    renderBackground(world, cliprect, canvas, ctx, pos);
 
-
-        var backgroundrenderposleft = (Math.floor(backgroundrenderpos)) * (canvas.height* ratio)
-        var backgroundrenderposright = (Math.ceil(backgroundrenderpos)) * (canvas.height*ratio)
-        if((backgroundrenderpos-Math.floor(backgroundrenderpos))<0.5 ){
-            var backgroundrenderposleft = ((Math.floor(backgroundrenderpos))*canvas.height* ratio)-(canvas.height*ratio)
-            var backgroundrenderposright = (Math.floor(backgroundrenderpos))*(canvas.height* ratio)
-
-        }
-        ctx.drawImage(world.background, backgroundrenderposleft+(((pos.x*scale*50)-pos.x*scale)/50), (-canvas.height / 2)+(pos.y*scale)*0.9, canvas.height* ratio, canvas.height)
-        ctx.drawImage(world.background, backgroundrenderposright+(((pos.x*scale*50)-pos.x*scale)/50), -canvas.height / 2+(pos.y*scale)*0.9, canvas.height* ratio, canvas.height)
-    }
-    if(world.foreground) {
-        var cliprectpos = cliprect.x+(cliprect.width / 1.2)
-        var ratio = world.foreground.width / world.foreground.height
-        var foregroundrenderpos = cliprectpos / (canvas.height* ratio/1.2)/10
-        var renderleft = foregroundrenderpos-1
-
-        var backgroundrenderposmid =   Math.floor(foregroundrenderpos)* (canvas.height* ratio/1.2)
-        var backgroundrenderposleft = (Math.floor(renderleft)) *(canvas.height* ratio/1.2)
-        var backgroundrenderposright = Math.ceil(foregroundrenderpos)*(canvas.height* ratio/1.2)
-
-        ctx.drawImage(world.foreground, backgroundrenderposleft+(((pos.x*scale*5)-pos.x*scale)/5), -canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5) +(canvas.height/4), canvas.height* ratio/1.2, canvas.height/1.2)
-        ctx.drawImage(world.foreground, backgroundrenderposright+(((pos.x*scale*5)-pos.x*scale)/5),-canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5) +(canvas.height/4), canvas.height* ratio/1.2 , canvas.height/1.2)
-        ctx.drawImage(world.foreground, backgroundrenderposmid+(((pos.x*scale*5)-pos.x*scale)/5), -canvas.height / 2+(((pos.y*scale*5)-pos.y*scale)/5)+(canvas.height/4) ,canvas.height* ratio/1.2, canvas.height/1.2)
-    }
+    // draw physics engine objects
     graphics.renderer.renderWorld(cliprect)
 }
 
