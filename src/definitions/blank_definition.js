@@ -40,7 +40,7 @@ export function createDefinition() {
     defn.platform_type = "platform";
 
     //contact handler
-    defn.contactHandler = function( ) { };
+    defn.contactHandler = function(world) { };
 
     return defn;
 }

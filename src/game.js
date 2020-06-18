@@ -13,6 +13,9 @@ import {createLevel as jamesLevel} from './levels/james_level.js';
 import {renderBackground} from "./background.js";
 
 var levels = { "default" : defaultLevel , "brendan" :brendanLevel , "james" :jamesLevel };
+var levelorder = ["default" , "brendan" , "james"];
+var world = 0;
+var graphics = 0;
 
 // Function to parse the url data into parameters
 function parseHtmlParameters()
@@ -32,16 +35,50 @@ function parseHtmlParameters()
     return params;
 }
 
-function createWorld(params) {
+function nextLevel() {
+    // find the next level
+    var nextlevel = levelorder[0];
+    for( var index = 0 ; index < levelorder.length ; ++ index )
+    {
+        if( world.level === levelorder[index]) {
+            if( index < levelorder.length-1 ) {
+                nextlevel = levelorder[index+1];
+            }
+            break;
+        }
+    }
+
+    world.nextLevelHandler = undefined ; // stop multiple entries
+    graphics.runner.stop();
+    graphics = 0 ;
+    world = 0 ;
+    launchLevel( nextlevel );
+}
+
+function restartLevel() {
+    var nextlevel = world.level;
+    world.nextLevelHandler = undefined ; // stop multiple entries
+    graphics.runner.stop();
+    graphics = 0 ;
+    world = 0 ;
+    launchLevel( nextlevel );
+}
+
+function createWorld(level) {
     // initialise the world with gravity towards the bottom of the screen
     var world = new planck.World({
         gravity : Vec2(0, 40)
     });
 
     // create the ground
-    world.door = levels[params.level](world);
+    world.door = levels[level](world);
 
+    // create the explorer
     world.explorer = createExplorer(world);
+
+    //setup end of level handler
+    world.nextLevelHandler = nextLevel;
+    world.restartLevelHandler = restartLevel;
 
     // setup collision handling
     setupCollisionHandling(world);
@@ -116,13 +153,18 @@ function renderCore( graphics, world ){
     graphics.renderer.renderWorld(cliprect)
 }
 
-// create the world
-var params = parseHtmlParameters();
-var world = createWorld( params );
-var graphics = createGraphicsRendererRunner(world);
-setupKeyBindings() ;
+function launchLevel( levelname ) {
+    // create the world
+    world = createWorld( levelname );
+    graphics = createGraphicsRendererRunner(world);
+    setupKeyBindings() ;
 
-// start the runner
-graphics.runner.renderer( function() { renderCore( graphics , world ); } )
-graphics.runner.start( );
+    // start the runner
+    graphics.runner.renderer( function() { renderCore( graphics , world ); } )
+    graphics.runner.start( );
+}
+
+var params = parseHtmlParameters();
+launchLevel( params.level );
+
 

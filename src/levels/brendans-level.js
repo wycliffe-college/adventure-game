@@ -15,6 +15,8 @@ const density = 0.0;
 //Create the Level
 export function createLevel(world) {
 
+    world.level = "brendan";
+
     //Give it properties i.e. Density/Gravity (not used with createPlatform)
     var groundFD = {density: density, friction: friction};
 

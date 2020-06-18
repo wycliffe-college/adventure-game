@@ -8,6 +8,9 @@ import {defaultObject} from "../obj_definitions/blank_object_defn.js";
 
 
 export function createLevel(world) {
+
+    world.level = "james";
+
     createPlatform(world, -10,-4, 5,grass);
     createPlatform(world, 0,0, 10,grass);
     createPlatform(world, 50,-8, 50,grass);

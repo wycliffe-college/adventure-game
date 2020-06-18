@@ -14,11 +14,11 @@ export function setupCollisionHandling(world ) {
 
         // handle the explorer touching things
         if ( fixtureA.getBody().contactHandler !== undefined  && fixtureB.getBody() === world.explorer ) {
-            fixtureA.getBody().contactHandler();
+            fixtureA.getBody().contactHandler(world);
         }
 
         if ( fixtureB.getBody().contactHandler !== undefined  && fixtureA.getBody() === world.explorer ) {
-            fixtureB.getBody().contactHandler();
+            fixtureB.getBody().contactHandler(world);
         }
     });
 
